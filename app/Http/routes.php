@@ -12,9 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->to('/home');
 });
 
-Route::auth();
 
-Route::get('/home', 'HomeController@index');
+
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    /* Users */
+    Route::get('/users', 'UserController@index')->name('users');
+    Route::get('/user/create', 'UserController@create')->name('create_user');
+    Route::post('/user/create' ,'UserController@postCreate')->name('post_create');
+});
+

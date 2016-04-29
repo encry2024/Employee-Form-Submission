@@ -23,4 +23,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public static function createUserAccount($data)
+    {
+        $new_user = new User();
+        $new_user->name = $data->get('name');
+        $new_user->email = $data->get('email');
+        $new_user->password = bcrypt($data->get('password'));
+        $new_user->employee_id = $data->get('employee_id');
+        $new_user->type = 'user';
+        $new_user->save();
+
+        return redirect()->back()->with('message', 'Employee '. $new_user->name .'was successfully registered');
+    }
 }

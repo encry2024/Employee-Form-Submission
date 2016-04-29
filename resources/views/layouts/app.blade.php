@@ -7,16 +7,24 @@
 
     <title>NSI :: Employee Form Submission</title>
 
+    @yield('header')
+
     <!-- Styles -->
     <link rel="stylesheet" href="{{ URL::to('/') }}/bootstrap-3.3.6-dist/css/bootstrap.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
+    <link rel="stylesheet" href="{{ URL::to('/') }}/custom_css/nsi.css">
 </head>
 <body id="app-layout">
 
     @yield('content')
 
+    <style>
+        body {
+            font-family: 'Lato';
+        }
+    </style>
+
     <!-- JavaScripts -->
-    <script src="{{ URL::to('/') }}/bootstrap-3.3.6/dist/js/jquery.min.js"></script>
+    <script src="{{ URL::to('/') }}/bootstrap-3.3.6-dist/js/jquery.min.js"></script>
     <script src="{{ URL::to('/') }}/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 </body>
 </html>
