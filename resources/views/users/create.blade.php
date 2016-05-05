@@ -110,7 +110,11 @@
                                                 <div class="form-group{{ $errors->has('campaign') ? ' has-error' : '' }}">
                                                     <label for="InputCampaign" class="col-sm-4 col-xs-12 control-label text-info">Campaign/Department:</label>
                                                     <div class="col-sm-6 col-xs-12">
-                                                        <input type="string" name="campaign" class="form-control" id="InputCampaign">
+                                                        <select name="campaign" class="form-control" id="InputCampaign">
+                                                            <option value="1">HR Department</option>
+                                                            <option value="2">SingTel Department</option>
+                                                            <option value="3">IT-Department</option>
+                                                        </select>
 
                                                         @if ($errors->has('campaign'))
                                                             <span class="help-block">
