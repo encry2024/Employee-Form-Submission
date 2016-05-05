@@ -49,7 +49,7 @@
                                                     <td>{{ $user->name }}</td>
                                                     <td>{{ $user->email }}</td>
                                                     <td>
-
+                                                        button
                                                     </td>
                                                 </tr>
                                             @endforeach

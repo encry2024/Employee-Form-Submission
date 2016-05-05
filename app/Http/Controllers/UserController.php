@@ -29,7 +29,9 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('users.create');
+        $users = User::whereType('user')->get();
+
+        return view('users.create', compact('users'));
     }
 
     public function postCreate(StoreUserRequest $data)

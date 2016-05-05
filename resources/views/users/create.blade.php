@@ -24,94 +24,136 @@
                     <div class="row">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
                                 <div class="page-header">
                                     <h3>Create User Account</h3>
                                 </div>
 
-                                <form class="form-horizontal" method="POST" action="{{ route('post_create') }}">
-                                    {!! csrf_field() !!}
+                                <div class="col-lg-12">
+                                    <form class="form-horizontal" method="POST" action="{{ route('post_create') }}">
+                                        {!! csrf_field() !!}
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="row">
+                                                <h4>Account Information</h4>
+                                                <br>
+                                                <div class="form-group{{ $errors->has('employee_id') ? ' has-error' : '' }}">
+                                                    <label for="InputEmployeeId" class="col-sm-4 col-xs-12 control-label text-info">Employee ID:</label>
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <input type="string" name="employee_id" class="form-control" id="InputEmployeeId">
 
-                                    <div class="form-group{{ $errors->has('employee_id') ? ' has-error' : '' }}">
-                                        <label for="InputEmployeeId" class="col-sm-2 col-xs-12 control-label">Employee ID</label>
-                                        <div class="col-sm-6 col-xs-12">
-                                            <input type="string" name="employee_id" class="form-control" id="InputEmployeeId">
+                                                        @if ($errors->has('employee_id'))
+                                                            <span class="help-block">
+                                                            <strong>{{ $errors->first('employee_id') }}</strong>
+                                                        </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
 
-                                            @if ($errors->has('employee_id'))
-                                                <span class="help-block">
-                                                <strong>{{ $errors->first('employee_id') }}</strong>
-                                            </span>
-                                            @endif
+                                                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                                                    <label for="inputName" class="col-sm-4 col-xs-12 control-label text-info">Employee Name:</label>
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <input type="string" name="name" class="form-control" id="inputName">
+
+                                                        @if ($errors->has('name'))
+                                                            <span class="help-block">
+                                                            <strong>{{ $errors->first('name') }}</strong>
+                                                        </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                                    <label for="inputEmail" class="col-sm-4 col-xs-12 control-label text-info">E-mail:</label>
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <input type="email" name="email" class="form-control" id="inputEmail">
+
+                                                        @if ($errors->has('email'))
+                                                            <span class="help-block">
+                                                            <strong>{{ $errors->first('email') }}</strong>
+                                                        </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                                    <label for="inputPassword3" class="col-sm-4 col-xs-12 control-label text-info">Password:</label>
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <input type="password" name="password" class="form-control" id="inputPassword3">
+
+                                                        @if ($errors->has('password'))
+                                                            <span class="help-block">
+                                                            <strong>{{ $errors->first('password') }}</strong>
+                                                        </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                                                    <label for="inputConfirmPassword" class="col-sm-4 col-xs-12 control-label text-info">Confirm Password:</label>
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <input type="password" name="password_confirmation" class="form-control" id="inputConfirmPassword">
+
+                                                        @if ($errors->has('password_confirmation'))
+                                                            <span class="help-block">
+                                                            <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                                        </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                        <label for="inputName" class="col-sm-2 col-xs-12 control-label">Name</label>
-                                        <div class="col-sm-6 col-xs-12">
-                                            <input type="string" name="name" class="form-control" id="inputName">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="row">
+                                                <h4>Work Information</h4>
+                                                <br>
+                                                <div class="form-group{{ $errors->has('campaign') ? ' has-error' : '' }}">
+                                                    <label for="InputCampaign" class="col-sm-4 col-xs-12 control-label text-info">Campaign/Department:</label>
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <input type="string" name="campaign" class="form-control" id="InputCampaign">
 
-                                            @if ($errors->has('name'))
-                                                <span class="help-block">
-                                                <strong>{{ $errors->first('name') }}</strong>
-                                            </span>
-                                            @endif
+                                                        @if ($errors->has('campaign'))
+                                                            <span class="help-block">
+                                                            <strong>{{ $errors->first('campaign') }}</strong>
+                                                        </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group{{ $errors->has('rank') ? ' has-error' : '' }}">
+                                                    <label for="InputRank" class="col-sm-4 col-xs-12 control-label text-info">Approver Rank:</label>
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <select name="rank" class="form-control" id="InputRank">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                        </select>
+                                                        @if ($errors->has('email'))
+                                                            <span class="help-block">
+                                                            <strong>{{ $errors->first('rank') }}</strong>
+                                                        </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                        <label for="inputEmail" class="col-sm-2 col-xs-12 control-label">E-mail</label>
-                                        <div class="col-sm-6 col-xs-12">
-                                            <input type="email" name="email" class="form-control" id="inputEmail">
-
-                                            @if ($errors->has('email'))
-                                                <span class="help-block">
-                                                <strong>{{ $errors->first('email') }}</strong>
-                                            </span>
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                        <label for="inputPassword3" class="col-sm-2 col-xs-12 control-label">Password</label>
-                                        <div class="col-sm-6 col-xs-12">
-                                            <input type="password" name="password" class="form-control" id="inputPassword3">
-
-                                            @if ($errors->has('password'))
-                                                <span class="help-block">
-                                                <strong>{{ $errors->first('password') }}</strong>
-                                            </span>
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                                        <label for="inputConfirmPassword" class="col-sm-2 col-xs-12 control-label">Confirm Password</label>
-                                        <div class="col-sm-6 col-xs-12">
-                                            <input type="password" name="password_confirmation" class="form-control" id="inputConfirmPassword">
-
-                                            @if ($errors->has('password_confirmation'))
-                                                <span class="help-block">
-                                                <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                            </span>
-                                            @endif
-                                        </div>
-                                    </div>
-
+                                    </form>
                                     <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-circle"></span> Create Account</button>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
 
-                        {{--<br><br><br><br><br>
+                        <br><br>
                         <div class="row">
                             <div class="alert alert-info" role="alert">
-                                The <b>ACCOUNT TYPE</b> that will be created here will have an account type <b>DEV</b> tht stands for <b>Developer</b> and some of the functions of the admin side will be disabled.
-                                However, You may request to the admin to give you an access for the admin side.
+                                All users that will be created by the admin will have <i>USER</i> type.
                             </div>
-                        </div>--}}
+                        </div>
                     </div>
                 </div>
             </div>
