@@ -27,7 +27,9 @@ class StoreUserRequest extends Request
             'name' => 'required',
             'email' => 'required|unique:users,email',
             'employee_id' => 'required|unique:users,employee_id',
-            'password' => 'required|confirmed'
+            'password' => 'required|confirmed',
+            'campaign_id' => 'required',
+            'rank' => 'required'
         ];
     }
 

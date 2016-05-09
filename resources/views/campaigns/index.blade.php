@@ -14,18 +14,18 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="page-header">
-                                    <h2><span class="glyphicon glyphicon-user"></span> Users
-                                        <a href="{{ route('create_user') }}" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus-sign"></span> Create Account</a>
+                                    <h2><span class="glyphicon glyphicon-flag"></span> Departments
+                                        <a href="{{ route('create_campaign') }}" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus-sign"></span> Create Campaign</a>
                                     </h2>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
-                            @if(count($users) == 0)
+                            @if(count($campaigns) == 0)
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="alert alert-danger" role="alert">
-                                        You have currently no registered developers right now
+                                        You have currently no registered campaigns to be viewed.
                                     </div>
                                 </div>
                             @else
@@ -33,27 +33,25 @@
                                     <div class="table-responsive">
                                         <table class="table table-bordered">
                                             <thead>
-                                                <tr>
-                                                    <th></th>
-                                                    <th>Employee ID</th>
-                                                    <th>Name</th>
-                                                    <th>Email</th>
-                                                    <th>Actions</th>
-                                                </tr>
+                                            <tr>
+                                                <th></th>
+                                                <th>Name</th>
+                                                <th>Date Created</th>
+                                                <th>Actions</th>
+                                            </tr>
                                             </thead>
 
                                             <tbody>
-                                                @foreach($users as $user)
-                                                    <tr>
-                                                        <td>{{ $user->id }}</td>
-                                                        <td>{{ $user->employee_id }}</td>
-                                                        <td>{{ $user->name }}</td>
-                                                        <td>{{ $user->email }}</td>
-                                                        <td>
-                                                            button
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
+                                            @foreach($campaigns as $campaign)
+                                                <tr>
+                                                    <td>{{ $campaign->id }}</td>
+                                                    <td>{{ $campaign->name }}</td>
+                                                    <td>{{ date('F d, Y', strtotime($campaign->created_at)) }}</td>
+                                                    <td class="col-lg-2">
+                                                        <button class="btn btn-sm btn-primary">Manage {{ $campaign->name }}</button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                             </tbody>
                                         </table>
                                     </div>

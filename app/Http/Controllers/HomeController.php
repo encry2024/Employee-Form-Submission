@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\User;
+use App\Campaign;
 
 class HomeController extends Controller
 {
@@ -26,6 +27,13 @@ class HomeController extends Controller
     public function index()
     {
         $users = User::whereType('user')->get();
-        return view('home', compact('users'));
+        $campaigns = Campaign::all();
+
+        return view('home', compact('users', 'campaigns'));
+    }
+
+    public function userIndex()
+    {
+        return view('auth.user.dashboard');
     }
 }

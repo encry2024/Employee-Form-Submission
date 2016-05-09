@@ -30,7 +30,7 @@
                                 </div>
 
                                 <div class="col-lg-12">
-                                    <form class="form-horizontal" method="POST" action="{{ route('post_create') }}">
+                                    <form class="form-horizontal" method="POST" action="{{ route('post_user') }}">
                                         {!! csrf_field() !!}
                                         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                                             <div class="row">
@@ -107,18 +107,18 @@
                                             <div class="row">
                                                 <h4>Work Information</h4>
                                                 <br>
-                                                <div class="form-group{{ $errors->has('campaign') ? ' has-error' : '' }}">
+                                                <div class="form-group{{ $errors->has('campaign_id') ? ' has-error' : '' }}">
                                                     <label for="InputCampaign" class="col-sm-4 col-xs-12 control-label text-info">Campaign/Department:</label>
                                                     <div class="col-sm-6 col-xs-12">
-                                                        <select name="campaign" class="form-control" id="InputCampaign">
-                                                            <option value="1">HR Department</option>
-                                                            <option value="2">SingTel Department</option>
-                                                            <option value="3">IT-Department</option>
+                                                        <select name="campaign_id" class="form-control" id="InputCampaign">
+                                                            @foreach($campaigns as $campaign)
+                                                                <option value="{{ $campaign->id }}">{{ $campaign->name }}</option>
+                                                            @endforeach
                                                         </select>
 
-                                                        @if ($errors->has('campaign'))
+                                                        @if ($errors->has('campaign_id'))
                                                             <span class="help-block">
-                                                            <strong>{{ $errors->first('campaign') }}</strong>
+                                                            <strong>{{ $errors->first('campaign_id') }}</strong>
                                                         </span>
                                                         @endif
                                                     </div>
@@ -142,12 +142,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
-                                    <div class="form-group">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-circle"></span> Create Account</button>
+                                        <div class="form-group">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-circle"></span> Create Account</button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

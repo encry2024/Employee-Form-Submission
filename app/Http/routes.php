@@ -12,7 +12,11 @@
 */
 
 Route::get('/', function () {
-    return redirect()->to('/home');
+    if(Auth::guard()->guest()) {
+        return redirect()->to('login');
+    } else {
+        return redirect()->to(Auth::user()->type . '/home');
+    }
 });
 
 
@@ -20,11 +24,25 @@ Route::get('/', function () {
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
-    Route::get('/home', 'HomeController@index')->name('home');
+    /* Admin Group */
+    Route::group(['prefix' => 'admin', 'middleware' => 'check_if_admin'], function() {
+        Route::get('/dashboard', 'HomeController@index')->name('home');
 
-    /* Users */
-    Route::get('/users', 'UserController@index')->name('users');
-    Route::get('/user/create', 'UserController@create')->name('create_user');
-    Route::post('/user/create' ,'UserController@postCreate')->name('post_create');
+        /* Users */
+        Route::get('/users', 'UserController@index')->name('users');
+        Route::get('/user/create', 'UserController@create')->name('create_user');
+        Route::post('/user/create' ,'UserController@postUser')->name('post_user');
+
+        /* Campaigns */
+        Route::get('/campaigns', 'CampaignController@index')->name('campaigns');
+        Route::get('/campaigns/create', 'CampaignController@create')->name('create_campaign');
+        Route::post('/campaigns/create', 'CampaignController@postCampaign')->name('post_campaign');
+    });
+
+    Route::group(['prefix' => 'user'], function() {
+        /* User Dashboard */
+        Route::get('/dashboard', 'HomeController@userIndex')->name('user_home');
+
+    });
 });
 
