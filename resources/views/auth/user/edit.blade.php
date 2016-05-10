@@ -35,11 +35,12 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         {!! csrf_field() !!}
                                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                        <input type="hidden" name="campaign_id" value="{{ Auth::user()->campaign_id }}">
 
                                         <div class="form-group{{ $errors->has('employee_id') ? ' has-error' : '' }}">
                                             <label for="InputEmployeeId" class="col-sm-4 col-xs-12 control-label text-info">Employee ID:</label>
                                             <div class="col-sm-6 col-xs-12">
-                                                <input type="string" name="employee_id" class="form-control" id="InputEmployeeId" value="{{ Auth::user()->employee_id }}">
+                                                <input type="string" name="employee_id" class="form-control" id="InputEmployeeId" value="{{ Auth::user()->employee_id }}" readonly>
 
                                                 @if ($errors->has('employee_id'))
                                                     <span class="help-block">
@@ -59,7 +60,14 @@
                                         <div class="form-group{{ $errors->has('campaign_id') ? ' has-error' : '' }}">
                                             <label for="InputCampaign" class="col-sm-4 col-xs-12 control-label text-info">Campaign/Department:</label>
                                             <div class="col-sm-6 col-xs-12">
-                                                <input class="form-control" type="string" name="campaign" value="{{ Auth::user()->campaign->name }}">
+                                                <select name="campaign" id="" class="form-control">
+                                                    @foreach($campaigns as $campaign)
+                                                        <option value="{{ $campaign->id }}"
+                                                        {{ $campaign->id == Auth::user()->campaign_id ? 'selected' : '' }}
+                                                        >{{ $campaign->name }}</option>
+                                                    @endforeach
+                                                </select>
+
                                             </div>
                                         </div>
 

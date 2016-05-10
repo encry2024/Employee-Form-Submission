@@ -51,7 +51,9 @@ class UserController extends Controller
 
     public function editUserProfile()
     {
-        return view('auth.user.edit');
+        $campaigns = Campaign::all();
+
+        return view('auth.user.edit', compact('campaigns'));
     }
 
     public function postEditUserProfile(Request $request)

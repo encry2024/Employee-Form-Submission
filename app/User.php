@@ -13,7 +13,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'campaign_id'
     ];
 
     /**
@@ -47,7 +47,14 @@ class User extends Authenticatable
 
     public static function updateUserProfile($request)
     {
+        $campaign_id = Campaign::find($request->get('campaign'));
 
+        User::find($request->get('user_id'))->update([
+            'email' => $request->get('email'),
+            'campaign_id' => $campaign_id->id,
+        ]);
+
+        return redirect()->back();
     }
 
     public function getType()
