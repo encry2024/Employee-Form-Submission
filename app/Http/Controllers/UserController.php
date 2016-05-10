@@ -48,4 +48,16 @@ class UserController extends Controller
     {
         return view('auth.user.profile');
     }
+
+    public function editUserProfile()
+    {
+        return view('auth.user.edit');
+    }
+
+    public function postEditUserProfile(Request $request)
+    {
+        $update_user_profile = User::updateUserProfile($request);
+
+        return $update_user_profile;
+    }
 }

@@ -45,6 +45,11 @@ class User extends Authenticatable
         return redirect()->back()->with('message', 'Employee '. $new_user->name .'was successfully registered');
     }
 
+    public static function updateUserProfile($request)
+    {
+
+    }
+
     public function getType()
     {
         return $this->type();

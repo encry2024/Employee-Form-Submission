@@ -19,8 +19,6 @@ Route::get('/', function () {
     }
 });
 
-
-
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
@@ -39,12 +37,15 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/campaigns/create', 'CampaignController@postCampaign')->name('post_campaign');
     });
 
+    /* User Group */
     Route::group(['prefix' => 'user'], function() {
         /* User Dashboard */
         Route::get('/dashboard', 'HomeController@userIndex')->name('user_home');
 
         /* User Profile */
         Route::get('/profile', 'UserController@userProfile')->name('user_profile');
+        Route::get('/edit/profile', 'UserController@editUserProfile')->name('edit_user_profile');
+        Route::post('/edit/profile', 'UserController@postEditUserProfile')->name('post_update_user');
     });
 });
 

@@ -15,7 +15,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="page-header">
                                     <h2><i class="glyphicon glyphicon-user"></i> {{ Auth::user()->name }}
-                                    <span class="pull-right"><a href="{{ route('edit_user_profile') }}" class="btn btn-primary">Edit Profile</a></span>
+                                        <span class="pull-right"><button onclick="document.updateProfile.submit();" class="btn btn-primary">Edit Profile</button></span>
                                     </h2>
                                 </div>
                             </div>
@@ -25,20 +25,21 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="alert alert-info" role="alert">
-                                       <span class="glyphicon glyphicon-info-sign"></span>
+                                        <span class="glyphicon glyphicon-info-sign"></span>
                                         {{ Auth::user()->name }}'s Personal Information
 
                                     </div>
                                 </div>
-
-                                <!-- Personal Information -->
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <form class="form-horizontal" method="POST" action="{{ route('post_user') }}">
+                                <form class="form-horizontal" method="POST" action="{{ route('post_update_user') }}" name="updateProfile">
+                                    <!-- Personal Information -->
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         {!! csrf_field() !!}
+                                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+
                                         <div class="form-group{{ $errors->has('employee_id') ? ' has-error' : '' }}">
                                             <label for="InputEmployeeId" class="col-sm-4 col-xs-12 control-label text-info">Employee ID:</label>
                                             <div class="col-sm-6 col-xs-12">
-                                                <input type="string" name="employee_id" class="form-control" id="InputEmployeeId" readonly value="{{ Auth::user()->employee_id }}">
+                                                <input type="string" name="employee_id" class="form-control" id="InputEmployeeId" value="{{ Auth::user()->employee_id }}">
 
                                                 @if ($errors->has('employee_id'))
                                                     <span class="help-block">
@@ -51,30 +52,29 @@
                                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                             <label for="inputEmail" class="col-sm-4 col-xs-12 control-label text-info">E-mail:</label>
                                             <div class="col-sm-6 col-xs-12">
-                                                <input type="email" name="email" class="form-control" id="inputEmail" value="{{ Auth::user()->email }}" readonly>
+                                                <input type="email" name="email" class="form-control" id="inputEmail" value="{{ Auth::user()->email }}">
                                             </div>
                                         </div>
 
                                         <div class="form-group{{ $errors->has('campaign_id') ? ' has-error' : '' }}">
                                             <label for="InputCampaign" class="col-sm-4 col-xs-12 control-label text-info">Campaign/Department:</label>
                                             <div class="col-sm-6 col-xs-12">
-                                                <input class="form-control" type="string" value="{{ Auth::user()->campaign->name }}" readonly>
+                                                <input class="form-control" type="string" name="campaign" value="{{ Auth::user()->campaign->name }}">
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
 
-                                <!-- Work Settings -->
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="alert alert-info" role="alert">
-                                       <span class="glyphicon glyphicon-cog"></span> Work Settings
                                     </div>
-                                    <form class="form-horizontal" method="POST" action="{{ route('post_user') }}">
+
+                                    <!-- Work Settings -->
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="alert alert-info" role="alert">
+                                            <span class="glyphicon glyphicon-cog"></span> Work Settings
+                                        </div>
                                         {!! csrf_field() !!}
                                         <div class="form-group{{ $errors->has('employee_id') ? ' has-error' : '' }}">
                                             <label for="InputTotalLeaveHours" class="col-sm-4 col-xs-12 control-label text-info">Total hrs of Sick Leave Remaining:</label>
                                             <div class="col-sm-6 col-xs-12">
-                                                <input type="string" name="employee_id" class="form-control" id="InputTotalLeaveHours" readonly value="15">
+                                                <input type="string" class="form-control" name="sick_leave" id="InputTotalLeaveHours" value="15">
 
                                                 @if ($errors->has('employee_id'))
                                                     <span class="help-block">
@@ -87,20 +87,11 @@
                                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                             <label for="inputEmail" class="col-sm-4 col-xs-12 control-label text-info">Total hrs of Vacation Leave Remaining:</label>
                                             <div class="col-sm-6 col-xs-12">
-                                                <input type="email" name="email" class="form-control" id="inputEmail" value="15" readonly>
+                                                <input type="email" class="form-control" name="vacation_leave" id="inputEmail" value="15">
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
-
-                                <!-- Leave & OT form buttons -->
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="alert alert-info" role="alert">
-                                        <span class="glyphicon glyphicon-folder-close"></span> Leave & Overtime Forms
                                     </div>
-                                    <a href="" class="btn btn-primary">File an Overtime Form</a>
-                                    <a href="" class="btn btn-primary">File a Leave Form</a>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
