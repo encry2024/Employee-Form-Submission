@@ -15,7 +15,7 @@ Route::get('/', function () {
     if(Auth::guard()->guest()) {
         return redirect()->to('login');
     } else {
-        return redirect()->to(Auth::user()->type . '/home');
+        return redirect()->to(Auth::user()->type . '/dashboard');
     }
 });
 
@@ -43,6 +43,8 @@ Route::group(['middleware' => 'web'], function () {
         /* User Dashboard */
         Route::get('/dashboard', 'HomeController@userIndex')->name('user_home');
 
+        /* User Profile */
+        Route::get('/profile', 'UserController@userProfile')->name('user_profile');
     });
 });
 

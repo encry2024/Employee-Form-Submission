@@ -14,8 +14,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ Auth::user()->name }}</a></li>
+                <li><a href="#" style="color: white;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Logged in as :: {{ Auth::user()->name }}</a></li>
+                <li><a href="{{ url('/logout') }}">Change Password</a></li>
                 <li><a href="{{ url('/logout') }}">Logout</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->

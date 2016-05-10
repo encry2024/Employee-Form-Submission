@@ -43,4 +43,9 @@ class UserController extends Controller
 
         return $post_create;
     }
+
+    public function userProfile()
+    {
+        return view('auth.user.profile');
+    }
 }

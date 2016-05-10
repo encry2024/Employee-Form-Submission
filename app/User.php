@@ -25,6 +25,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function campaign()
+    {
+        return $this->belongsTo(Campaign::class);
+    }
+
     public static function createUserAccount($data)
     {
         $new_user = new User();
