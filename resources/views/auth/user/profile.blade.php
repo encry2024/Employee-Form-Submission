@@ -67,27 +67,42 @@
                                 <!-- Work Settings -->
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="alert alert-info" role="alert">
-                                       <span class="glyphicon glyphicon-cog"></span> Work Settings
+                                       <span class="glyphicon glyphicon-cog"></span> Leave Settings
                                     </div>
                                     <form class="form-horizontal" method="POST" action="{{ route('post_user') }}">
                                         {!! csrf_field() !!}
-                                        <div class="form-group{{ $errors->has('employee_id') ? ' has-error' : '' }}">
-                                            <label for="InputTotalLeaveHours" class="col-sm-4 col-xs-12 control-label text-info">Total hrs of Sick Leave Remaining:</label>
+                                        <div class="form-group">
+                                            <label for="InputTotalLeaveHours" class="col-sm-4 col-xs-12 control-label text-info">Total hrs of Vacation Leave Remaining:</label>
                                             <div class="col-sm-6 col-xs-12">
-                                                <input type="string" name="employee_id" class="form-control" id="InputTotalLeaveHours" readonly value="15">
-
-                                                @if ($errors->has('employee_id'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('employee_id') }}</strong>
-                                                    </span>
-                                                @endif
+                                                <input class="form-control" id="InputTotalLeaveHours" readonly value="{{ Auth::user()->user_setting->vacation_leave }}">
                                             </div>
                                         </div>
 
-                                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                            <label for="inputEmail" class="col-sm-4 col-xs-12 control-label text-info">Total hrs of Vacation Leave Remaining:</label>
+                                        <div class="form-group">
+                                            <label for="inputEmail" class="col-sm-4 col-xs-12 control-label text-info">Total hrs of Sick Leave Remaining:</label>
                                             <div class="col-sm-6 col-xs-12">
-                                                <input type="email" name="email" class="form-control" id="inputEmail" value="15" readonly>
+                                                <input class="form-control" id="inputEmail" value="{{ Auth::user()->user_setting->sick_leave }}" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputEmail" class="col-sm-4 col-xs-12 control-label text-info">Total hrs of Paternity Leave Remaining:</label>
+                                            <div class="col-sm-6 col-xs-12">
+                                                <input class="form-control" id="inputEmail" value="{{ Auth::user()->user_setting->paternity_leave }}" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputEmail" class="col-sm-4 col-xs-12 control-label text-info">Total hrs of Maternity Leave Remaining:</label>
+                                            <div class="col-sm-6 col-xs-12">
+                                                <input class="form-control" id="inputEmail" value="{{ Auth::user()->user_setting->maternity_leave }}" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputEmail" class="col-sm-4 col-xs-12 control-label text-info">Total hrs of Authorized Absence Remaining:</label>
+                                            <div class="col-sm-6 col-xs-12">
+                                                <input class="form-control" id="inputEmail" value="{{ Auth::user()->user_setting->authorized_absence }}" readonly>
                                             </div>
                                         </div>
                                     </form>

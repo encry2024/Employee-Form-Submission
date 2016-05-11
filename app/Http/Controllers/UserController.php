@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\User;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\StoreUserSettingsRequest;
 use App\Campaign;
 
 
@@ -37,9 +38,9 @@ class UserController extends Controller
         return view('users.create', compact('users', 'campaigns'));
     }
 
-    public function postUser(StoreUserRequest $data)
+    public function postUser(StoreUserRequest $data, StoreUserSettingsRequest $request)
     {
-        $post_create = User::createUserAccount($data);
+        $post_create = User::createUserAccount($data, $request);
 
         return $post_create;
     }
