@@ -20,7 +20,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="page-header">
                                     <h2><i class="glyphicon glyphicon-user"></i> {{ Auth::user()->name }}
-                                        <span class="pull-right"><button onclick="document.updateProfile.submit();" class="btn btn-primary">Edit Profile</button></span>
+                                        <span class="pull-right"><button onclick="document.updateProfile.submit();" class="btn btn-primary">Save Changes</button></span>
                                     </h2>
                                 </div>
                             </div>
@@ -94,28 +94,7 @@
                                         <div class="form-group">
                                             <label for="inputEmail" class="col-sm-4 col-xs-12 control-label text-info">Total hrs of Sick Leave Remaining:</label>
                                             <div class="col-sm-6 col-xs-12">
-                                                <input name="sick_leave" class="form-control" id="inputEmail" value="{{ Auth::user()->user_setting->sick_leave }}">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="inputEmail" class="col-sm-4 col-xs-12 control-label text-info">Total hrs of Paternity Leave Remaining:</label>
-                                            <div class="col-sm-6 col-xs-12">
-                                                <input name="paternity_leave" class="form-control" id="inputEmail" value="{{ Auth::user()->user_setting->paternity_leave }}">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="inputEmail" class="col-sm-4 col-xs-12 control-label text-info">Total hrs of Maternity Leave Remaining:</label>
-                                            <div class="col-sm-6 col-xs-12">
-                                                <input name="maternity_leave" class="form-control" id="inputEmail" value="{{ Auth::user()->user_setting->maternity_leave }}">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="inputEmail" class="col-sm-4 col-xs-12 control-label text-info">Total hrs of Authorized Absence Remaining:</label>
-                                            <div class="col-sm-6 col-xs-12">
-                                                <input name="authorized_absence" class="form-control" id="inputEmail" value="{{ Auth::user()->user_setting->authorized_absence }}">
+                                                <input name="sick_leave" class="form-control" id="InputSickLeaveHours" value="{{ Auth::user()->user_setting->sick_leave }}">
                                             </div>
                                         </div>
                                     </div>

@@ -84,27 +84,6 @@
                                                 <input class="form-control" id="inputEmail" value="{{ Auth::user()->user_setting->sick_leave }}" readonly>
                                             </div>
                                         </div>
-
-                                        <div class="form-group">
-                                            <label for="inputEmail" class="col-sm-4 col-xs-12 control-label text-info">Total hrs of Paternity Leave Remaining:</label>
-                                            <div class="col-sm-6 col-xs-12">
-                                                <input class="form-control" id="inputEmail" value="{{ Auth::user()->user_setting->paternity_leave }}" readonly>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="inputEmail" class="col-sm-4 col-xs-12 control-label text-info">Total hrs of Maternity Leave Remaining:</label>
-                                            <div class="col-sm-6 col-xs-12">
-                                                <input class="form-control" id="inputEmail" value="{{ Auth::user()->user_setting->maternity_leave }}" readonly>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="inputEmail" class="col-sm-4 col-xs-12 control-label text-info">Total hrs of Authorized Absence Remaining:</label>
-                                            <div class="col-sm-6 col-xs-12">
-                                                <input class="form-control" id="inputEmail" value="{{ Auth::user()->user_setting->authorized_absence }}" readonly>
-                                            </div>
-                                        </div>
                                     </form>
                                 </div>
 
@@ -113,8 +92,9 @@
                                     <div class="alert alert-info" role="alert">
                                         <span class="glyphicon glyphicon-folder-close"></span> Leave & Overtime Forms
                                     </div>
+                                    <a href="" class="btn btn-primary">File a Change Schedule Form</a>
                                     <a href="" class="btn btn-primary">File an Overtime Form</a>
-                                    <a href="" class="btn btn-primary">File a Leave Form</a>
+                                    <a href="{{ route('leave_form') }}" class="btn btn-primary">File a Leave Form</a>
                                 </div>
                             </div>
                         </div>

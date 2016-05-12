@@ -36,7 +36,7 @@ class User extends Authenticatable
         return $this->hasOne(UserSetting::class, 'user_id');
     }
 
-    public static function createUserAccount($data, $request)
+    public static function createUserAccount($request, $data)
     {
         $new_user = new User();
         $new_user->name = $data->get('name');
@@ -52,9 +52,6 @@ class User extends Authenticatable
         $user_setting->user_id = $new_user->id;
         $user_setting->vacation_leave = $request->get('vacation_leave');
         $user_setting->sick_leave = $request->get('sick_leave');
-        $user_setting->paternity_leave = $request->get('paternity_leave');
-        $user_setting->maternity_leave = $request->get('maternity_leave');
-        $user_setting->authorized_absence = $request->get('authorized_absence');
         $user_setting->save();
 
         return redirect()->back()->with('message', 'Employee '. $new_user->name .'was successfully registered');
@@ -71,10 +68,7 @@ class User extends Authenticatable
 
         $update_leave_settings = UserSetting::where('user_id', $request->get('user_id'))->update([
             'vacation_leave' => $request->get('vacation_leave'),
-            'sick_leave' => $request->get('sick_leave'),
-            'paternity_leave' => $request->get('paternity_leave'),
-            'maternity_leave' => $request->get('maternity_leave'),
-            'authorized_absence' => $request->get('authorized_absence')
+            'sick_leave' => $request->get('sick_leave')
         ]);
 
         return redirect()->back();

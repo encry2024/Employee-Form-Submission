@@ -38,9 +38,9 @@ class UserController extends Controller
         return view('users.create', compact('users', 'campaigns'));
     }
 
-    public function postUser(StoreUserRequest $data, StoreUserSettingsRequest $request)
+    public function postUser(Request $request, StoreUserRequest $data)
     {
-        $post_create = User::createUserAccount($data, $request);
+        $post_create = User::createUserAccount($request, $data);
 
         return $post_create;
     }
