@@ -11,7 +11,11 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ URL::to('/') }}/bootstrap-3.3.6-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="{{ URL::to('/') }}/bootstrap-datepicker/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="{{ URL::to('/') }}/custom_css/nsi.css">
+
+    <script src="{{ URL::to('/') }}/bootstrap-3.3.6-dist/js/jquery.min.js"></script>
+    <script src="{{ URL::to('/') }}/bootstrap-datepicker/js/momentjs.js"></script>
 </head>
 <body id="app-layout">
 
@@ -26,5 +30,7 @@
     <!-- JavaScripts -->
     <script src="{{ URL::to('/') }}/bootstrap-3.3.6-dist/js/jquery.min.js"></script>
     <script src="{{ URL::to('/') }}/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+    <script src="{{ URL::to('/') }}/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
 </body>
 </html>
