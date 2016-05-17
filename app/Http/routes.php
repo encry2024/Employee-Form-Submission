@@ -40,6 +40,7 @@ Route::group(['middleware' => 'web'], function () {
 
         /* Forms */
         Route::get('/leave_form', 'FormController@leaveForm')->name('leave_form');
+        Route::post('/leave_form', 'FormController@postLeaveForm')->name('post_leave_form');
     });
 });
 

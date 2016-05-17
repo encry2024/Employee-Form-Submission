@@ -22,4 +22,11 @@ class FormController extends Controller
     {
         return view('forms.leave');
     }
+
+    public function postLeaveForm(Request $request)
+    {
+        $postLeaveForm = Form::post_leave_form($request);
+
+        return $postLeaveForm;
+    }
 }

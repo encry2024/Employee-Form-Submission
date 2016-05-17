@@ -24,28 +24,32 @@
                             <div class="panel-heading">
                                 <h2 class="panel-title">Leave Request Form</h2>
                             </div>
-                            <form>
+                            <form method="POST" action="{{ route('post_leave_form') }}">
+                                {{ csrf_field() }}
+                                <input type="hidden" value="1" name="form_id">
+                                <input type="hidden" value="{{ Auth::user()->id }}" name="user_id">
+
                                 <div class="panel-body">
 
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                             <div class="form-group">
                                                 <label>Employee Name</label>
-                                                <input class="form-control" placeholder="Employee Name">
+                                                <input class="form-control" placeholder="Employee Name" value="{{ Auth::user()->name }}" readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label for="">Employee Number</label>
-                                                <input class="form-control" placeholder="Employee Number">
+                                                <input class="form-control" placeholder="Employee Number" value="{{ Auth::user()->employee_id }}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                             <div class="form-group">
                                                 <label for="">Department/Campaign</label>
-                                                <input class="form-control" placeholder="Department/Campaign">
+                                                <input class="form-control" placeholder="Department/Campaign" value="{{ Auth::user()->campaign->name }}" readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label for="">Position</label>
-                                                <input class="form-control" placeholder="Position">
+                                                <input class="form-control" placeholder="Position" value="{{ Auth::user()->position }}" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -56,13 +60,13 @@
 
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                            <h4>Reason for Leave (<i>please tick appropiate box</i>):</h4>
+                                            <h4>Leave (<i>please tick appropiate box</i>):</h4>
                                             <br>
-                                            <div class="radio col-lg-push-2"><label><input name="leave_option" value="vacation_leave" type="radio"> Vacation</label></div>
-                                            <div class="radio col-lg-push-2"><label><input name="leave_option" value="sick_leave" type="radio"> Sick</label></div>
-                                            <div class="radio col-lg-push-2"><label><input name="leave_option" value="paternity_leave" type="radio">Paternity</label></div>
-                                            <div class="radio col-lg-push-2"><label><input name="leave_option" value="maternity_leave" type="radio">Maternity</label></div>
-                                            <div class="radio col-lg-push-2"><label><input name="leave_option" value="authorized_leave" type="radio">Authorized Absence</label></div>
+                                            <div class="radio col-lg-push-2"><label><input name="leave_option" value="Vacation Leave" type="radio"> Vacation</label></div>
+                                            <div class="radio col-lg-push-2"><label><input name="leave_option" value="Sick Leave" type="radio"> Sick</label></div>
+                                            <div class="radio col-lg-push-2"><label><input name="leave_option" value="Paternity Leave" type="radio">Paternity</label></div>
+                                            <div class="radio col-lg-push-2"><label><input name="leave_option" value="Maternity Leave" type="radio">Maternity</label></div>
+                                            <div class="radio col-lg-push-2"><label><input name="leave_option" value="Authorized Absence" type="radio">Authorized Absence</label></div>
                                         </div>
 
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -89,7 +93,7 @@
 
                                             <div class="form-group">
                                                 <label for="">Reason For Leave</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" name="leave_reason">
                                             </div>
                                         </div>
                                     </div>
@@ -109,6 +113,8 @@
     <script>
         $(document).ready(function() {
             $('#datepicker').datepicker({
+                startDate: moment().add(1, 'd').format('MM/DD/YYYY'),
+                format: 'M d, yyyy'
             });
 
             $("#getDate").change(function(){

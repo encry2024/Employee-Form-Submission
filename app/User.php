@@ -36,6 +36,11 @@ class User extends Authenticatable
         return $this->hasOne(UserSetting::class, 'user_id');
     }
 
+    public function form_users()
+    {
+        return $this->belongsToMany(Form::class, FormUser::class, 'form_id', 'id');
+    }
+
     public static function createUserAccount($request, $data)
     {
         $new_user = new User();
@@ -72,10 +77,5 @@ class User extends Authenticatable
         ]);
 
         return redirect()->back();
-    }
-
-    public function getType()
-    {
-        return $this->type();
     }
 }
