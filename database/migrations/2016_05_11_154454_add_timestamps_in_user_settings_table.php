@@ -24,9 +24,5 @@ class AddTimestampsInUserSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::table('user_settings', function (Blueprint $table) {
-            $table->dropColumn('created_at');
-            $table->dropColumn('deleted_at');
-        });
     }
 }

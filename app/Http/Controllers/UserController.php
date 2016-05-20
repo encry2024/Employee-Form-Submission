@@ -63,4 +63,11 @@ class UserController extends Controller
 
         return $update_user_profile;
     }
+
+    public function getUsers($department_id, $user)
+    {
+        $get_users = User::getUsers($department_id, $user);
+
+        return $get_users;
+    }
 }

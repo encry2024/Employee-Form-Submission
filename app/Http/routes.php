@@ -11,6 +11,9 @@ Route::get('/', function () {
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
+    /* JSON */
+    Route::get('department/{department_id}/get_users/{user}', 'UserController@getUsers');
+
     /* Admin Group */
     Route::group(['prefix' => 'admin', 'middleware' => 'check_if_admin'], function() {
         Route::get('/dashboard', 'HomeController@index')->name('home');
@@ -24,7 +27,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/departments', 'CampaignController@index')->name('campaigns');
         Route::get('/departments/create', 'CampaignController@create')->name('create_campaign');
         Route::post('/departments/create', 'CampaignController@postCampaign')->name('post_campaign');
+        Route::get('/department/{department}', 'CampaignController@show')->name('show_campaign');
 
+        /* Approver */
+        Route::post('/appoint_approver', 'CampaignController@postApprover')->name('post_approver');
     });
 
     /* User Group */

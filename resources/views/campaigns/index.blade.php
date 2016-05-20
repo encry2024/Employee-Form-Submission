@@ -48,7 +48,7 @@
                                                     <td>{{ $campaign->name }}</td>
                                                     <td>{{ date('F d, Y', strtotime($campaign->created_at)) }}</td>
                                                     <td class="col-lg-2">
-                                                        <button class="btn btn-sm btn-primary">Manage {{ $campaign->name }}</button>
+                                                        <a href="{{ route('show_campaign', $campaign->id) }}" class="btn btn-sm btn-primary">Manage {{ $campaign->name }}</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

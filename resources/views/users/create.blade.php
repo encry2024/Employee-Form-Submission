@@ -32,6 +32,19 @@
                                 <div class="col-lg-12">
                                     <form class="form-horizontal" method="POST" action="{{ route('post_user') }}">
                                         {!! csrf_field() !!}
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="emp_reg_type" id="emp_reg_type_1" value="employee" checked> Register as an Employee
+                                                </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="emp_reg_type" id="emp_reg_type_2" value="approver"> Register as an Approver
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <br>
+
                                         <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                                             <div class="row">
                                                 <h4>Account Information</h4>
@@ -123,24 +136,6 @@
                                                         @endif
                                                     </div>
                                                 </div>
-
-                                                <div class="form-group{{ $errors->has('rank') ? ' has-error' : '' }}">
-                                                    <label for="InputRank" class="col-sm-5 col-xs-12 control-label text-info">Approver Rank:</label>
-                                                    <div class="col-sm-7 col-xs-12">
-                                                        <select name="rank" class="form-control" id="InputRank">
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                        </select>
-
-                                                        @if ($errors->has('email'))
-                                                            <span class="help-block">
-                                                            <strong>{{ $errors->first('rank') }}</strong>
-                                                        </span>
-                                                        @endif
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
 
@@ -159,27 +154,6 @@
                                                     <label for="InputSickLeaveHrs" class="col-sm-5 col-xs-12 control-label text-info">Sick Leave:</label>
                                                     <div class="col-sm-7 col-xs-12">
                                                         <input placeholder="Hrs of Sick Leave" type="string" name="sick_leave" class="form-control" id="InputSickLeaveHrs">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="InputPaternityLeaveHrs" class="col-sm-5 col-xs-12 control-label text-info">Paternity Leave:</label>
-                                                    <div class="col-sm-7 col-xs-12">
-                                                        <input placeholder="Hrs of Paternity Leave" name="paternity_leave" class="form-control" id="InputPaternityLeaveHrs">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="InputMaternityLeaveHrs" class="col-sm-5 col-xs-12 control-label text-info">Maternity Leave:</label>
-                                                    <div class="col-sm-7 col-xs-12">
-                                                        <input placeholder="Hrs of Maternity Leave" name="maternity_leave" class="form-control" id="InputMaternityLeaveHrs">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="InputAuthorizedAbsence" class="col-sm-5 col-xs-12 control-label text-info">Authorized Absence:</label>
-                                                    <div class="col-sm-7 col-xs-12">
-                                                        <input placeholder="Hrs of Authorized Absence" name="authorized_absence" class="form-control" id="InputAuthorizedAbsence">
                                                     </div>
                                                 </div>
                                             </div>

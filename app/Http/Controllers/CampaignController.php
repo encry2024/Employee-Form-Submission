@@ -42,4 +42,16 @@ class CampaignController extends Controller
 
         return $post_campaign;
     }
+
+    public function show(Campaign $department)
+    {
+        return view('campaigns.show', compact('department'));
+    }
+
+    public function postApprover(Request $request)
+    {
+        $post_approver = Campaign::postApprover($request);
+
+        return $post_approver;
+    }
 }

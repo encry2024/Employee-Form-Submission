@@ -50,7 +50,6 @@ class User extends Authenticatable
         $new_user->employee_id = $data->get('employee_id');
         $new_user->type = 'user';
         $new_user->campaign_id = $data->get('campaign_id');
-        $new_user->rank = $data->get('rank');
         $new_user->save();
 
         $user_setting = new UserSetting();
@@ -58,6 +57,12 @@ class User extends Authenticatable
         $user_setting->vacation_leave = $request->get('vacation_leave');
         $user_setting->sick_leave = $request->get('sick_leave');
         $user_setting->save();
+
+        if ($request->get('emp_reg_type') == 'approver') {
+            $approver = new Approver();
+            $approver->user_id = $new_user->id;
+            $approver->save();
+        }
 
         return redirect()->back()->with('message', 'Employee '. $new_user->name .'was successfully registered');
     }
@@ -77,5 +82,31 @@ class User extends Authenticatable
         ]);
 
         return redirect()->back();
+    }
+
+    public static function getUsers($department_id, $user)
+    {
+        $array = [];
+        $users = User::where('name', 'LIKE', '%'.$user.'%')->where('campaign_id', $department_id)->get();
+        $icon = "";
+
+        foreach($users as $user) {
+
+            if($user->type == 'admin') {
+                $icon = '<i class="fa fa-star pull-right" aria-hidden="true"></i>
+                         <i class="fa fa-user-secret pull-right" aria-hidden="true"></i>';
+            } elseif($user->type == 'user') {
+                $icon = '<i class="fa fa-user pull-right" aria-hidden="true"></i>';
+            }
+
+            $array[] = [
+                'id'   => $user->id,
+                'name' => $user->name,
+                'role' => ucfirst($user->position),
+                'icon' => $icon
+            ];
+        }
+
+        return $array;
     }
 }
