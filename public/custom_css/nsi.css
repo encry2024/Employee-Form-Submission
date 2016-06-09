@@ -1,3 +1,12 @@
+.form-title {
+    font-size: 18px;
+}
+
+.description {
+    font-size: 13px;
+    font-style: italic;
+}
+
 @media (min-width: 768px) {
     .sidebar {
         position: fixed;
@@ -86,4 +95,8 @@
     font-weight: 700;
     src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url("/custom_css/HkF_qI1x_noxlxhrhMQYEJBw1xU1rKptJj_0jans920.woff2") format('woff2');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+.float-right {
+    float: right;
 }

@@ -38,7 +38,7 @@
                                                     <th>Employee ID</th>
                                                     <th>Name</th>
                                                     <th>Email</th>
-                                                    <th>Actions</th>
+                                                    <th class="text-right">Actions</th>
                                                 </tr>
                                             </thead>
 
@@ -50,7 +50,7 @@
                                                         <td>{{ $user->name }}</td>
                                                         <td>{{ $user->email }}</td>
                                                         <td>
-                                                            button
+                                                            <a href="{{ route('show_user', $user->id) }}" class="btn btn-primary float-right">View Profile</a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

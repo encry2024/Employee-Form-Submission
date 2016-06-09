@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RenameEmployeeSettingsToUserSettingsTable extends Migration
+class CreateRoleUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,9 @@ class RenameEmployeeSettingsToUserSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::rename('employee_settings', 'user_settings');
+        Schema::table('role_user', function (Blueprint $table) {
+            //
+        });
     }
 
     /**
@@ -22,6 +24,8 @@ class RenameEmployeeSettingsToUserSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('user_settings');
+        Schema::table('role_user', function (Blueprint $table) {
+            //
+        });
     }
 }

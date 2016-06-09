@@ -56,13 +56,14 @@
                                                 <th>Approver Rank</th>
                                             </tr>
                                         </thead>
+
                                         <tbody>
-                                        @foreach($department->users as $user)
-                                            <tr>
-                                                <td>{{ $user->name }}</td>
-                                                <td>{{ $user->rank }}</td>
-                                            </tr>
-                                        @endforeach
+                                            @foreach($department->approver_campaign as $approver_campaign)
+                                                <tr>
+                                                    <td>{{ $approver_campaign->approver->user->name }}</td>
+                                                    <td>{{ $approver_campaign->rank }}</td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -76,7 +77,7 @@
 
     <!-- Appoint Approver -->
     <div class="modal fade appoint_modal" tabindex="-1" role="dialog">
-        <form action="{{ route('post_approver') }}" method="POST">
+        <form action="{{ route('post_approver') }}" method="POST" class="form-horizontal">
             {{ csrf_field() }}
             <input type="hidden" name="department_id" value="{{ $department->id }}">
             <input type="hidden" id="approver" name="approver">
@@ -87,7 +88,20 @@
                         <h4 class="modal-title">{{ $department->name }}: Appoint Approver</h4>
                     </div>
                     <div class="modal-body">
-                        <input class="usrs_dropdown selectize-control single" id="user_dropdown" name="approver">
+                        <div class="form-group{{ $errors->has('approver_id') ? ' has-error' : '' }}">
+                            <label for="inputApprover" class="col-sm-3 col-xs-12 control-label text-info">Approver</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <select class="selectize-control single" id="user_dropdown">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('rank') ? ' has-error' : '' }}">
+                            <label for="inputRank" class="col-sm-3 col-xs-12 control-label text-info">Rank</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input type="text" class="form-control" name="rank">
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -105,6 +119,7 @@
                 labelField: 'name',
                 searchField: 'name',
                 placeholder: '-- Search Employee --',
+                create: false,
                 onItemAdd: function(value) {
                     document.getElementById('approver').value = value;
                 },

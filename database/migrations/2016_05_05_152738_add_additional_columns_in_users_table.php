@@ -25,9 +25,9 @@ class AddAdditionalColumnsInUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+/*        Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('campaign_id');
             $table->dropColumn('rank');
-        });
+        });*/
     }
 }

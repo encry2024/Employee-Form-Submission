@@ -12,9 +12,7 @@ class DropRankColumnInUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('rank');
-        });
+
     }
 
     /**
@@ -24,5 +22,8 @@ class DropRankColumnInUsersTable extends Migration
      */
     public function down()
     {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('rank');
+        });
     }
 }

@@ -36,8 +36,9 @@
                                             <tr>
                                                 <th></th>
                                                 <th>Name</th>
-                                                <th>Date Created</th>
-                                                <th>Actions</th>
+                                                <th>No. of Employee</th>
+                                                <th>No. of Approver</th>
+                                                <th class="text-right">Actions</th>
                                             </tr>
                                             </thead>
 
@@ -46,9 +47,10 @@
                                                 <tr>
                                                     <td>{{ $campaign->id }}</td>
                                                     <td>{{ $campaign->name }}</td>
-                                                    <td>{{ date('F d, Y', strtotime($campaign->created_at)) }}</td>
+                                                    <td>{{ count($campaign->users) }}</td>
+                                                    <td>{{ count($campaign->approver_campaign) }}</td>
                                                     <td class="col-lg-2">
-                                                        <a href="{{ route('show_campaign', $campaign->id) }}" class="btn btn-sm btn-primary">Manage {{ $campaign->name }}</a>
+                                                        <a href="{{ route('show_campaign', $campaign->id) }}" class="btn btn-sm btn-primary float-right">Manage Campaign</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

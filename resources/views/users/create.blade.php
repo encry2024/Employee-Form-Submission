@@ -32,19 +32,6 @@
                                 <div class="col-lg-12">
                                     <form class="form-horizontal" method="POST" action="{{ route('post_user') }}">
                                         {!! csrf_field() !!}
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="emp_reg_type" id="emp_reg_type_1" value="employee" checked> Register as an Employee
-                                                </label>
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="emp_reg_type" id="emp_reg_type_2" value="approver"> Register as an Approver
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <br>
-
                                         <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                                             <div class="row">
                                                 <h4>Account Information</h4>
@@ -120,18 +107,15 @@
                                             <div class="row">
                                                 <h4>Work Information</h4>
                                                 <br>
-                                                <div class="form-group{{ $errors->has('campaign_id') ? ' has-error' : '' }}">
-                                                    <label for="InputCampaign" class="col-sm-5 col-xs-12 control-label text-info">Department:</label>
-                                                    <div class="col-sm-7 col-xs-12">
-                                                        <select name="campaign_id" class="form-control" id="InputCampaign">
-                                                            @foreach($campaigns as $campaign)
-                                                                <option value="{{ $campaign->id }}">{{ $campaign->name }}</option>
-                                                            @endforeach
-                                                        </select>
 
-                                                        @if ($errors->has('campaign_id'))
+                                                <div class="form-group{{ $errors->has('position') ? ' has-error' : '' }}">
+                                                    <label for="InputPosition" class="col-sm-5 col-xs-12 control-label text-info">Position:</label>
+                                                    <div class="col-sm-7 col-xs-12">
+                                                        <input type="text" name="position" class="form-control" id="InputPosition">
+
+                                                        @if ($errors->has('position'))
                                                             <span class="help-block">
-                                                            <strong>{{ $errors->first('campaign_id') }}</strong>
+                                                            <strong>{{ $errors->first('position') }}</strong>
                                                         </span>
                                                         @endif
                                                     </div>

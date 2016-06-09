@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class CheckAuthIfAdmin
 {
@@ -13,11 +14,13 @@ class CheckAuthIfAdmin
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $guard = null)
     {
-        if ($request->user()->type != 'admin') {
-            abort(403, 'Unauthorized action.');
-        }
+        if (Auth::guard($guard)->check()) {
+            if ($request->user()->type != 'admin') {
+                abort(403, 'Unauthorized action.');
+            }
+        } 
 
         return $next($request);
     }

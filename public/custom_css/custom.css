@@ -1,5 +1,10 @@
+.form-title {
+    font-size: 18px;
+}
+
 .description {
     font-size: 13px;
+    font-style: italic;
 }
 
 .nav-item.active {

@@ -22,6 +22,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/users', 'UserController@index')->name('users');
         Route::get('/user/create', 'UserController@create')->name('create_user');
         Route::post('/user/create' ,'UserController@postUser')->name('post_user');
+        Route::get('/user/{user}', 'UserController@showUser')->name('show_user');
 
         /* Departments */
         Route::get('/departments', 'CampaignController@index')->name('campaigns');
@@ -31,6 +32,9 @@ Route::group(['middleware' => 'web'], function () {
 
         /* Approver */
         Route::post('/appoint_approver', 'CampaignController@postApprover')->name('post_approver');
+
+        /* Forms */
+        Route::get('/leave/{leave}', 'FormController@showLeave')->name('show_leave');
     });
 
     /* User Group */
@@ -47,6 +51,9 @@ Route::group(['middleware' => 'web'], function () {
         /* Forms */
         Route::get('/leave_form', 'FormController@leaveForm')->name('leave_form');
         Route::post('/leave_form', 'FormController@postLeaveForm')->name('post_leave_form');
+        Route::get('submitted/leave', 'FormController@viewLeave')->name('leave');
+        Route::get('submitted/change_schedule', 'FormController@viewChangeSchedule')->name('change_schedule');
+        Route::get('submitted/overtime', 'FormController@viewOvertime')->name('overtime');
     });
 });
 

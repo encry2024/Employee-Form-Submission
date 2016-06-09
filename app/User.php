@@ -41,6 +41,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Form::class, FormUser::class, 'form_id', 'id');
     }
 
+    public function approver_user()
+    {
+        return $this->hasMany(Approver::class);
+    }
+
     public static function createUserAccount($request, $data)
     {
         $new_user = new User();
@@ -49,7 +54,7 @@ class User extends Authenticatable
         $new_user->password = bcrypt($data->get('password'));
         $new_user->employee_id = $data->get('employee_id');
         $new_user->type = 'user';
-        $new_user->campaign_id = $data->get('campaign_id');
+        $new_user->position = $request->get('position');
         $new_user->save();
 
         $user_setting = new UserSetting();
@@ -58,13 +63,7 @@ class User extends Authenticatable
         $user_setting->sick_leave = $request->get('sick_leave');
         $user_setting->save();
 
-        if ($request->get('emp_reg_type') == 'approver') {
-            $approver = new Approver();
-            $approver->user_id = $new_user->id;
-            $approver->save();
-        }
-
-        return redirect()->back()->with('message', 'Employee '. $new_user->name .'was successfully registered');
+        return redirect()->back()->with('message', 'Employee [ '. $new_user->name .' ] was successfully registered');
     }
 
     public static function updateUserProfile($request)
@@ -86,23 +85,30 @@ class User extends Authenticatable
 
     public static function getUsers($department_id, $user)
     {
+        /*$users = Approver::with(['user'])->get();
+        dd($users);*/
+
         $array = [];
-        $users = User::where('name', 'LIKE', '%'.$user.'%')->where('campaign_id', $department_id)->get();
+        $user_approvers = Approver::with(['user' => function($query) use($user, $department_id) {
+            $query->where('name', 'LIKE', '%'.$user.'%')->where('campaign_id', $department_id)->get();
+        }])->get();
+        
         $icon = "";
 
-        foreach($users as $user) {
+        foreach($user_approvers as $user_approver) {
 
-            if($user->type == 'admin') {
+            if($user_approver->user->type == 'admin') {
                 $icon = '<i class="fa fa-star pull-right" aria-hidden="true"></i>
                          <i class="fa fa-user-secret pull-right" aria-hidden="true"></i>';
-            } elseif($user->type == 'user') {
+            } elseif($user_approver->user->type == 'user') {
                 $icon = '<i class="fa fa-user pull-right" aria-hidden="true"></i>';
             }
 
             $array[] = [
-                'id'   => $user->id,
-                'name' => $user->name,
-                'role' => ucfirst($user->position),
+                'id'   => $user_approver->id,
+                'user_id' => $user_approver->user->id,
+                'name' => $user_approver->user->name,
+                'role' => ucfirst($user_approver->user->position),
                 'icon' => $icon
             ];
         }

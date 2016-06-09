@@ -3,5 +3,8 @@
         <br><br>
         <li class="nav-item {{ Request::route()->getName() == 'user_home' ? 'active' : '' }}"><a class="nav-link" href="{{ route('user_home') }}"><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;&nbsp; Dashboard</a></li>
         <li class="nav-item {{ Request::route()->getName() == 'user_profile' ? 'active' : '' }}"><a class="nav-link" href="{{ route('user_profile') }}"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp; Profile</a></li>
+        <li class="nav-item {{ Request::route()->getName() == 'leave' ? 'active' : '' }}"><a class="nav-link" href="{{ route('leave') }}"><span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;&nbsp; Leaves</a></li>
+        <li class="nav-item {{ Request::route()->getName() == 'change_schedule' ? 'active' : '' }}"><a class="nav-link" href="{{ route('change_schedule') }}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;&nbsp; Change Schedules</a></li>
+        <li class="nav-item {{ Request::route()->getName() == 'overtime' ? 'active' : '' }}"><a class="nav-link" href="{{ route('overtime') }}"><span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;&nbsp; Overtime</a></li>
     </ul>
 </nav>

@@ -6,6 +6,10 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\User;
 use App\Campaign;
+use App\Form;
+use App\ApproverForm;
+
+use App\Leave;
 
 class HomeController extends Controller
 {
@@ -26,10 +30,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $leaves = Leave::with(['form_user.user'])->whereStatus('PENDING')->get();
         $users = User::whereType('user')->get();
         $campaigns = Campaign::all();
 
-        return view('home', compact('users', 'campaigns'));
+        // dd($pending_forms);
+        return view('home', compact('users', 'campaigns', 'leaves'));
     }
 
     public function userIndex()

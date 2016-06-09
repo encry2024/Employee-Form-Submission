@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RenameEmployeeSettingsToUserSettingsTable extends Migration
+class RenameFormIdInApproverFormTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,9 @@ class RenameEmployeeSettingsToUserSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::rename('employee_settings', 'user_settings');
+        Schema::table('approver_form', function (Blueprint $table) {
+            $table->renameColumn('form_id', 'form_user_id');
+        });
     }
 
     /**
@@ -22,6 +24,8 @@ class RenameEmployeeSettingsToUserSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('user_settings');
+        Schema::table('approver_form', function (Blueprint $table) {
+            //
+        });
     }
 }

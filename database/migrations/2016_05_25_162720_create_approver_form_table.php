@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEmployeeSettingsTable extends Migration
+class CreateApproverFormTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,11 @@ class CreateEmployeeSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('employee_settings', function (Blueprint $table) {
+        Schema::create('approver_form', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('vacation_leave');
-            $table->integer('sick_leave');
-            $table->integer('paternity_leave');
-            $table->integer('maternity_leave');
-            $table->integer('authorized_absence');
+            $table->integer('approver_id');
+            $table->integer('form_id');
+            $table->string('status');
         });
     }
 
@@ -29,6 +27,6 @@ class CreateEmployeeSettingsTable extends Migration
      */
     public function down()
     {
-
+        Schema::drop('approver_form');
     }
 }

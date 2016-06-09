@@ -13,6 +13,11 @@ class Campaign extends Model
         return $this->hasMany(User::class);
     }
 
+    public function approver_campaign()
+    {
+        return $this->hasMany(ApproverCampaign::class);
+    }
+
     public static function postCampaign($data)
     {
         $new_campaign = new Campaign();
@@ -24,14 +29,12 @@ class Campaign extends Model
 
     public static function postApprover($request)
     {
-        $employee_ids = $request->get('approver');
-        $employee_ids = explode(',', $employee_ids);
+        /*dd($request->except('_token'));*/
 
-        foreach($employee_ids as $employee_id) {
-            $approver_campaign = new ApproverCampaign();
-            $approver_campaign->approver_id = $employee_id;
-            $approver_campaign->department_id = $request->get('department_id');
-            $approver_campaign->save();
-        }
+        $approver_campaign = new ApproverCampaign();
+        $approver_campaign->approver_id = $request->get('approver');
+        $approver_campaign->campaign_id = $request->get('department_id');
+        $approver_campaign->rank = $request->get('rank');
+        $approver_campaign->save();
     }
 }
