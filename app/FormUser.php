@@ -18,4 +18,9 @@ class FormUser extends Model
     {
         return $this->belongsTo(Form::class);
     }
+
+    public function leave()
+    {
+        return $this->hasOne(Leave::class);
+    }
 }

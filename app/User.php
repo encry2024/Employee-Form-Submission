@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use App\UserSetting;
+use Auth;
 
 class User extends Authenticatable
 {
@@ -41,9 +42,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Form::class, FormUser::class, 'form_id', 'id');
     }
 
-    public function approver_user()
+    public function approver()
     {
-        return $this->hasMany(Approver::class);
+        return $this->hasOne(Approver::class);
     }
 
     public static function createUserAccount($request, $data)
@@ -63,7 +64,7 @@ class User extends Authenticatable
         $user_setting->sick_leave = $request->get('sick_leave');
         $user_setting->save();
 
-        return redirect()->back()->with('message', 'Employee [ '. $new_user->name .' ] was successfully registered');
+        return redirect()->back()->with('message', "Employee [ '. $new_user->name .' ] was successfully registered");
     }
 
     public static function updateUserProfile($request)
@@ -83,32 +84,41 @@ class User extends Authenticatable
         return redirect()->back();
     }
 
+    public static function showApproverDashboard()
+    {
+        $approvers = Approver::with(['approver_forms' => function($query) {
+            $query->where('status', '=', 'pending');
+        }, 'approver_forms.form_user.leave', 'approver_forms.form_user.user'])->whereUserId(Auth::user()->id)->get();
+
+        // dd($approvers);
+
+        return view('auth.approver.dashboard', compact('approvers'));
+    }
+
+
+
+    /* JSON */
+
     public static function getUsers($department_id, $user)
     {
-        /*$users = Approver::with(['user'])->get();
-        dd($users);*/
-
         $array = [];
-        $user_approvers = Approver::with(['user' => function($query) use($user, $department_id) {
-            $query->where('name', 'LIKE', '%'.$user.'%')->where('campaign_id', $department_id)->get();
-        }])->get();
+        $users = User::all();
         
         $icon = "";
 
-        foreach($user_approvers as $user_approver) {
+        foreach($users as $user) {
 
-            if($user_approver->user->type == 'admin') {
+            if($user->type == 'admin') {
                 $icon = '<i class="fa fa-star pull-right" aria-hidden="true"></i>
                          <i class="fa fa-user-secret pull-right" aria-hidden="true"></i>';
-            } elseif($user_approver->user->type == 'user') {
+            } elseif($user->type == 'user') {
                 $icon = '<i class="fa fa-user pull-right" aria-hidden="true"></i>';
             }
 
             $array[] = [
-                'id'   => $user_approver->id,
-                'user_id' => $user_approver->user->id,
-                'name' => $user_approver->user->name,
-                'role' => ucfirst($user_approver->user->position),
+                'id' => $user->id,
+                'name' => $user->name,
+                'role' => ucfirst($user->position),
                 'icon' => $icon
             ];
         }

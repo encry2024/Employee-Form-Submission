@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\User;
+
 class Campaign extends Model
 {
     protected $fillable = ['name'];
@@ -29,12 +31,28 @@ class Campaign extends Model
 
     public static function postApprover($request)
     {
-        /*dd($request->except('_token'));*/
+        $approver = new Approver();
+        $approver->user_id = $request->get('user_id');
+        $approver->save();
 
         $approver_campaign = new ApproverCampaign();
-        $approver_campaign->approver_id = $request->get('approver');
+        $approver_campaign->approver_id = $request->get('user_id');
         $approver_campaign->campaign_id = $request->get('department_id');
         $approver_campaign->rank = $request->get('rank');
-        $approver_campaign->save();
+            
+        if($approver_campaign->save()) {
+            $user = User::find($request->get('user_id'));
+
+            if ($user->type == 'user') {
+                $user->update(['type' => 'approver', 'campaign_id' => 0]);
+
+                return redirect()->back();
+            } else {
+                return redirect()->back();
+            }
+        } else {
+            return redirect()->back();
+        }
+
     }
 }

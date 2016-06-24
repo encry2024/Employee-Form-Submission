@@ -16,4 +16,9 @@ class Approver extends Model
     {
         return $this->hasMany(Campaign::class);
     }
+
+    public function approver_forms()
+    {
+        return $this->hasMany(ApproverForm::class);
+    }
 }

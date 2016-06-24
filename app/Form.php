@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Form extends Model
 {
@@ -15,6 +16,9 @@ class Form extends Model
 
     public static function post_leave_form($request)
     {
+        $campaign_id = Auth::user()->campaign_id;
+        $approver_campaigns = ApproverCampaign::whereCampaignId($campaign_id)->get();
+
         $form_user = new FormUser();
         $form_user->form_id = $request->get('form_id');
         $form_user->user_id = $request->get('user_id');
@@ -29,7 +33,14 @@ class Form extends Model
         $leave_form->status = 'PENDING';
         $leave_form->save();
 
-        $approver_form = new ApproverForm();
+        foreach($approver_campaigns as $approver_campaign) {
+            $approver_form = new ApproverForm();
+            $approver_form->approver_id = $approver_campaign->approver_id;
+            $approver_form->form_user_id = $form_user->id;
+            $approver_form->status = 'pending';
+            $approver_form->save();
+        }
+
 
         return redirect()->back();
     }

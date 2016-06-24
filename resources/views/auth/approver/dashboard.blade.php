@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="row">
-                    @include('layouts.link-sidebar')
+                    @include('layouts.approver-linksidebar')
                     <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12 col-lg-offset-2 col-sm-offset-3 main">
 
                         <div class="row">
@@ -35,16 +35,18 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                                         <div class="list-group">
-                                            <div class="list-group-item form-title" style="background-color: #f5f5f5; border-color: #ddd;">
+                                            <div class="list-group-item bg-info form-title" style="background-color: #f5f5f5; border-color: #ddd;">
                                             Leave Forms
                                             </div>
-                                            @foreach($leaves as $leave)
-                                                <a href="{{ route('show_leave', $leave->id) }}" class="list-group-item">
-                                                    {{ $leave->leave_purpose }}
+                                            @foreach($approvers as $approver)
+                                                @foreach($approver->approver_forms as $pending_forms)
+                                                <a href="{{ route('show_leave', $pending_forms->form_user->leave->id) }}" class="list-group-item">
+                                                    {{ $pending_forms->form_user->leave->leave_purpose }}
                                                     <br>
-                                                    <span class="description">{{ $leave->form_user->user->name }}</span>
-                                                    <span class="float-right description">{{ date('F d, Y', strtotime($leave->created_at)) }}</span>
+                                                    <span class="description">{{ $pending_forms->form_user->user->name }}</span>
+                                                    <span class="float-right description">{{ date('F d, Y', strtotime($pending_forms->form_user->leave->created_at)) }}</span>
                                                 </a>
+                                                @endforeach
                                             @endforeach
                                         </div>
                                     </div>
@@ -72,7 +74,7 @@
                                             <a href="#" class="list-group-item">Vestibulum at eros</a>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>

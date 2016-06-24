@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Auth;
+
 use App\User;
 use App\Campaign;
 use App\Form;
 use App\ApproverForm;
-
 use App\Leave;
 
 class HomeController extends Controller
@@ -41,5 +42,12 @@ class HomeController extends Controller
     public function userIndex()
     {
         return view('auth.user.dashboard');
+    }
+
+    public function approverIndex()
+    {
+        $approver_dashboard = User::showApproverDashboard();
+
+        return $approver_dashboard;
     }
 }

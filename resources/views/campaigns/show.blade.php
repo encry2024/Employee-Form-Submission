@@ -12,7 +12,7 @@
                     <nav class="col-lg-2 col-md-3 col-sm-3 col-xs-12 sidebar" style="background-color: #0091b7;">
                         <ul class="nav nav-pills nav-stacked col-lg-12 col-md-12 col-sm-12 col-xs-12" style="font-weight: 100px; font-size: 17px;">
                             <br><br>
-                            <li class="nav-item"><a class="nav-link" data-toggle="modal" href="#" data-target=".appoint_modal"><span class="glyphicon glyphicon-pushpin"></span>&nbsp;&nbsp;&nbsp; Appoint Approver</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="modal" href="#" data-target=".appoint_modal"><span class="glyphicon glyphicon-pushpin"></span>&nbsp;&nbsp;&nbsp; Assign Users</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('campaigns') }}"><span class="glyphicon glyphicon-circle-arrow-left"></span>&nbsp;&nbsp;&nbsp; Back</a></li>
                         </ul>
                     </nav>
@@ -80,7 +80,8 @@
         <form action="{{ route('post_approver') }}" method="POST" class="form-horizontal">
             {{ csrf_field() }}
             <input type="hidden" name="department_id" value="{{ $department->id }}">
-            <input type="hidden" id="approver" name="approver">
+            <input type="hidden" id="user_id" name="user_id">
+
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">

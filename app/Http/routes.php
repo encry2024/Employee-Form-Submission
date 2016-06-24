@@ -55,5 +55,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('submitted/change_schedule', 'FormController@viewChangeSchedule')->name('change_schedule');
         Route::get('submitted/overtime', 'FormController@viewOvertime')->name('overtime');
     });
+
+    /* Approver Group */
+    Route::group(['prefix' => 'approver', 'middleware' => 'check_if_approver'], function() {
+        Route::get('/dashboard', 'HomeController@approverIndex')->name('approver_home');
+    });
 });
 
