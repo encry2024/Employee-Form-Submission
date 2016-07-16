@@ -156,7 +156,7 @@
                         <br><br>
                         <div class="row">
                             <div class="alert alert-info" role="alert">
-                                All users that will be created by the admin will have <i>USER</i> type.
+                                All users that will be created by the admin will have <i>USER</i> role.
                             </div>
                         </div>
                     </div>

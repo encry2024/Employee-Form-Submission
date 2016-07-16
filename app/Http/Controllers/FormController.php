@@ -21,7 +21,7 @@ class FormController extends Controller
         $this->middleware('auth');
     }
 
-    public function leaveForm()
+    public function viewLeave()
     {
         return view('forms.leave');
     }
@@ -38,8 +38,6 @@ class FormController extends Controller
         $approver_form = ApproverForm::whereFormUserId($leave->form_user_id)->get();
 
         return view('forms.show', compact('approver_form', 'leave'));
-
-        //return $approver_form->approver->user->name;
     }
 
     public function showChangeSchedule()

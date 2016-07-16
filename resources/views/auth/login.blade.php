@@ -32,7 +32,7 @@
 
                             @if ($errors->has('employee_id'))
                                 <span class="help-block">
-                                <strong>{{ $errors->first('employee_id') }}</strong>
+                                <strong class="text-danger">{{ $errors->first('employee_id') }}</strong>
                             </span>
                             @endif
                         </div>

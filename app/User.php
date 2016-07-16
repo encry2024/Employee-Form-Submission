@@ -64,7 +64,7 @@ class User extends Authenticatable
         $user_setting->sick_leave = $request->get('sick_leave');
         $user_setting->save();
 
-        return redirect()->back()->with('message', "Employee [ '. $new_user->name .' ] was successfully registered");
+        return redirect()->back()->with('message', $data->get('name') .' was successfully registered.');
     }
 
     public static function updateUserProfile($request)
@@ -94,6 +94,7 @@ class User extends Authenticatable
 
         return view('auth.approver.dashboard', compact('approvers'));
     }
+
 
 
 

@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\User;
 use App\Campaign;
 use App\Http\Requests\StoreCampaignRequest;
+use App\ApproverCampaign;
+use App\Approver;
 
 class CampaignController extends Controller
 {
@@ -53,5 +55,19 @@ class CampaignController extends Controller
         $post_approver = Campaign::postApprover($request);
 
         return $post_approver;
+    }
+
+    public function addUser(Campaign $department)
+    {
+        $users = User::where('campaign_id', 0)->where('type', '!=', 'admin')->get();
+
+        return view('campaigns.add_user', compact('users', 'department'));
+    }
+
+    public function postAddUser(Request $request, Campaign $department)
+    {
+        $add_user = Campaign::addUser($request, $department);
+
+        return $add_user;
     }
 }

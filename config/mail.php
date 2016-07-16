@@ -26,7 +26,7 @@ return [
     | Here you may provide the host address of the SMTP server used by your
     | applications. A default option is provided that is compatible with
     | the Mailgun mail service which will provide reliable deliveries.
-    |
+    | try k odito sakin.
     */
 
     'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
@@ -54,8 +54,7 @@ return [
     | used globally for all e-mails that are sent by your application.
     |
     */
-
-    'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => 'chaos.2025@gmail.com', 'name' => 'Excel Asia Business Solutions Burger'],
 
     /*
     |--------------------------------------------------------------------------
@@ -94,7 +93,7 @@ return [
     |
     */
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' => env('MAIL_PASSWORD', 'Welcome1!'),
 
     /*
     |--------------------------------------------------------------------------
@@ -109,4 +108,6 @@ return [
 
     'sendmail' => '/usr/sbin/sendmail -bs',
 
+    'pretend' => false
 ];
+

@@ -55,4 +55,51 @@ class Campaign extends Model
         }
 
     }
+
+    public static function addUser($request, $department)
+    {
+        foreach($request->except('_token') as $user_id) {
+            $value = explode('-', $user_id);
+            $user = User::findOrFail($value[1]);
+
+            if($user) {
+                if($value[0] == "approver") {
+                    // Check if the user is already an approver
+                    if($user->type == 'approver') {
+                        $approver = new Approver();
+                        $approver->user_id = $value[1];
+
+                        if($approver->save()) {
+                            $approver_campaign = new ApproverCampaign();
+                            $approver_campaign->approver_id = $approver->id;
+                            $approver_campaign->campaign_id = $department->id;
+                            $approver_campaign->save();
+                        }
+                    }
+
+                    $user->type = 'approver';
+
+                    if($user->save()) {
+                        $approver = new Approver();
+                        $approver->user_id = $value[1];
+
+                        if ($approver->save()) {
+                            $approver_campaign = new ApproverCampaign();
+                            $approver_campaign->approver_id = $approver->id;
+                            $approver_campaign->campaign_id = $department->id;
+                            $approver_campaign->save();
+                        }
+                    }
+
+                } elseif ($value[0] == 'user') {
+                    $new_user = User::find($value[1]);
+                    $new_user->update([
+                        'campaign_id' => $department->id,
+                        'type' => 'agent'
+                    ]);
+                }
+            }
+        }
+        return redirect()->back()->with('message', 'Users role was successfully updated.');
+    }
 }

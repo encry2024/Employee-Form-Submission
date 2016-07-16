@@ -63,51 +63,65 @@
                                             <h4>Leave (<i>please tick appropiate box</i>):</h4>
                                             <br>
                                             <div class="radio col-lg-push-2"><label>
-                                            <input name="leave_option" value="Vacation Leave" type="radio"> Vacation</label></div>
+                                                <input name="leave_option" value="Vacation Leave" type="radio"
+                                                    {{ $leave->leave_purpose == "Vacation Leave" ? "checked" : "" }}
+                                                disabled> Vacation</label></div>
                                             <div class="radio col-lg-push-2"><label>
-                                            <input name="leave_option" value="Sick Leave" type="radio"> Sick</label></div>
+                                                <input name="leave_option" value="Sick Leave" type="radio"
+                                                    {{ $leave->leave_purpose == "Sick Leave" ? "checked" : "" }}
+                                                disabled> Sick</label></div>
                                             <div class="radio col-lg-push-2"><label>
-                                            <input name="leave_option" value="Paternity Leave" type="radio">Paternity</label></div>
+                                                <input name="leave_option" value="Paternity Leave" type="radio"
+                                                    {{ $leave->leave_purpose == "Paternity Leave" ? "checked" : "" }}
+                                                disabled>Paternity</label></div>
                                             <div class="radio col-lg-push-2"><label>
-                                            <input name="leave_option" value="Maternity Leave" type="radio">Maternity</label></div>
+                                                <input name="leave_option" value="Maternity Leave" type="radio"
+                                                    {{ $leave->leave_purpose == "Maternity Leave" ? "checked" : "" }}
+                                                disabled>Maternity</label></div>
                                             <div class="radio col-lg-push-2"><label>
-                                            <input name="leave_option" value="Authorized Absence" type="radio">Authorized Absence</label></div>
+                                                <input name="leave_option" value="Authorized Absence" type="radio"
+                                                    {{ $leave->leave_purpose == "Authorized Leave" ? "checked" : "" }}
+                                                disabled>Authorized Absence</label></div>
                                         </div>
 
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                             <div class="form-group">
                                                 <label>Date Filed</label>
-                                                <input type="text" class="form-control" placeholder="Date Filed" name="date_filed" readonly value="{{ date('F d, Y') }}">
+                                                <input type="text" class="form-control" placeholder="Date Filed" name="date_filed" disabled
+                                                   value="{{ date('F d, Y') }}">
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="">Dates Requested</label>
                                                 <div class="input-group date-range input-daterange" id="datepicker">
-                                                    <input type="text" class="form-control" name="start" id="start"/>
+                                                    <input type="text" class="form-control" name="start" id="start" value="{{ $leave->start_date }}"
+                                                    disabled/>
                                                     <span class="input-group-addon">to</span>
-                                                    <input type="text" class="form-control" name="end" id="getDate"/>
+                                                    <input type="text" class="form-control" name="end" id="getDate" value="{{ $leave->end_date }}"
+                                                    disabled/>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="">Number of Days</label>
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" id="total_days" readonly>
+                                                    <input type="text" class="form-control" id="total_days"
+                                                   value="{{ date_diff(date_create($leave->start_date), date_create($leave->end_date))->format("%a") }}" disabled>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="">Reason For Leave</label>
-                                                <input type="text" class="form-control" name="leave_reason">
+                                                <input type="text" class="form-control" name="leave_reason" value="{{ $leave->reason }}" disabled>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                @if($approverForm->status == 'on-approve')
-                                    <div class="panel-footer">
-                                        <button type="submit" class="btn btn-default">Submit Leave Form</button>
-                                    </div>
+                                @if($approverForm->status == 'for-approve')
+                                <div class="panel-footer">
+                                    <button type="submit" class="btn btn-default">Submit Leave Form</button>
+                                </div>
                                 @endif
                             </form>
                         </div>

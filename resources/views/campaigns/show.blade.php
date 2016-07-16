@@ -12,11 +12,20 @@
                     <nav class="col-lg-2 col-md-3 col-sm-3 col-xs-12 sidebar" style="background-color: #0091b7;">
                         <ul class="nav nav-pills nav-stacked col-lg-12 col-md-12 col-sm-12 col-xs-12" style="font-weight: 100px; font-size: 17px;">
                             <br><br>
-                            <li class="nav-item"><a class="nav-link" data-toggle="modal" href="#" data-target=".appoint_modal"><span class="glyphicon glyphicon-pushpin"></span>&nbsp;&nbsp;&nbsp; Assign Users</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="modal" href="{{ route('add_users', $department->id) }}"><span class="glyphicon glyphicon-pushpin"></span>&nbsp;&nbsp;&nbsp; Assign Users</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('campaigns') }}"><span class="glyphicon glyphicon-circle-arrow-left"></span>&nbsp;&nbsp;&nbsp; Back</a></li>
                         </ul>
                     </nav>
                     <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12 col-lg-offset-2 col-sm-offset-3 main">
+                        <br><br>
+                        @if(Session::has('message'))
+                            <div class="row">
+                                <div class="alert alert-success" role="alert">
+                                    <span class="glyphicon glyphicon-ok"></span> {{ Session::get('message') }}
+                                </div>
+                            </div>
+                        @endif
+
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="page-header">
@@ -50,10 +59,11 @@
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
-                                        <thead>
+                                        <thead class="bg-default">
                                             <tr>
-                                                <th>{{ $department->name }}'s Approver</th>
-                                                <th>Approver Rank</th>
+                                                <th class="bg-default">{{ $department->name }}'s Approver</th>
+                                                <th class="bg-default">Approver Rank</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
 
@@ -62,6 +72,8 @@
                                                 <tr>
                                                     <td>{{ $approver_campaign->approver->user->name }}</td>
                                                     <td>{{ $approver_campaign->rank }}</td>
+                                                    <td><button class="btn btn-default btn-sm" data-toggle="modal" data-target="#change_approver_rank"
+                                                        onclick="getApproverId({{ $approver_campaign->approver->id, $approver_campaign->rank }})">Update Rank</button></td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -75,32 +87,22 @@
         </div>
     </div>
 
-    <!-- Appoint Approver -->
-    <div class="modal fade appoint_modal" tabindex="-1" role="dialog">
-        <form action="{{ route('post_approver') }}" method="POST" class="form-horizontal">
+    <div class="modal fade" tabindex="-1" role="dialog" id="change_approver_rank">
+        <form id="update_approver_rank" method="POST" class="form-horizontal">
             {{ csrf_field() }}
-            <input type="hidden" name="department_id" value="{{ $department->id }}">
-            <input type="hidden" id="user_id" name="user_id">
+            {{ method_field('patch') }}
 
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">{{ $department->name }}: Appoint Approver</h4>
+                        <h4 class="modal-title">Approver Rank</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group{{ $errors->has('approver_id') ? ' has-error' : '' }}">
-                            <label for="inputApprover" class="col-sm-3 col-xs-12 control-label text-info">Approver</label>
-                            <div class="col-sm-9 col-xs-12">
-                                <select class="selectize-control single" id="user_dropdown">
-                                </select>
-                            </div>
-                        </div>
-
                         <div class="form-group{{ $errors->has('rank') ? ' has-error' : '' }}">
                             <label for="inputRank" class="col-sm-3 col-xs-12 control-label text-info">Rank</label>
                             <div class="col-sm-9 col-xs-12">
-                                <input type="text" class="form-control" name="rank">
+                                <input type="number" class="form-control" name="rank" id="rank">
                             </div>
                         </div>
                     </div>
@@ -114,6 +116,13 @@
     </div><!-- /.modal -->
 
     <script>
+        function getApproverId(approver_id, rank) {
+            var update_route = "{{ route('update_approver_rank', ":approver_id") }}";
+                update_route = update_route.replace(':approver_id', approver_id);
+            document.getElementById("update_approver_rank").action = update_route;
+            document.getElementById("rank").val = rank;
+        }
+
         $(document).ready(function() {
             $('#user_dropdown').selectize({
                 valueField: 'id',

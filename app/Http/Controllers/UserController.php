@@ -70,4 +70,5 @@ class UserController extends Controller
 
         return $get_users;
     }
+
 }

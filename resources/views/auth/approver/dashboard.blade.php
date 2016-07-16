@@ -40,7 +40,7 @@
                                             </div>
                                             @foreach($approvers as $approver)
                                                 @foreach($approver->approver_forms as $pending_forms)
-                                                <a href="{{ route('show_leave', $pending_forms->form_user->leave->id) }}" class="list-group-item">
+                                                <a href="{{ route('approver_show_leave', $pending_forms->form_user->leave->id) }}" class="list-group-item">
                                                     {{ $pending_forms->form_user->leave->leave_purpose }}
                                                     <br>
                                                     <span class="description">{{ $pending_forms->form_user->user->name }}</span>
