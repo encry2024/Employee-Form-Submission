@@ -12,8 +12,10 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     @if(Session::has('message'))
                         <div class="row">
-                            <div class="alert alert-success" role="alert">
-                                {{ Session::get('message') }}
+                            <div class="alert alert-success alert-dismissable" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <span class="glyphicon glyphicon-ok"></span> {{ Session::get('message') }}
                             </div>
                         </div>
                     @endif

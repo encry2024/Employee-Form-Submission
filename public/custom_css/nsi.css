@@ -7,6 +7,10 @@
     font-style: italic;
 }
 
+.sub-title {
+    font-size: 17px;
+}
+
 @media (min-width: 768px) {
     .sidebar {
         position: fixed;

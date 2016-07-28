@@ -4106,13 +4106,13 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-stacked > li {
   float: none;
   margin-top: 2px;
-  margin-left: -2.5rem;
+  margin-left: -1rem;
   margin-right: -4rem;
   border-radius: 0px 0px 0px 0px;
 }
 .nav-stacked > li + li {
   margin-top: 2px;
-  margin-left: -2.5rem;
+  margin-left: -1rem;
   margin-right: -4rem;
   border-radius: 0px 0px 0px 0px;
 }

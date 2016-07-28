@@ -12,9 +12,9 @@ class Approver extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function campaigns()
+    public function approver_campaigns()
     {
-        return $this->hasMany(Campaign::class);
+        return $this->hasMany(ApproverCampaign::class);
     }
 
     public function approver_forms()

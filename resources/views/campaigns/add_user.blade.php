@@ -19,7 +19,7 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="page-header">
-                                    <h2><span class="glyphicon glyphicon-user"></span> Add Users
+                                    <h2><span class="glyphicon glyphicon-user"></span> Add Employee
                                         <button class="btn btn-success pull-right" onclick="document.add_user.submit();"><span class="glyphicon glyphicon-plus-sign"></span> Assign Users</button>
                                     </h2>
                                 </div>
@@ -46,33 +46,24 @@
                                                     <th>Employee ID</th>
                                                     <th>Name</th>
                                                     <th>Email</th>
-                                                    <th class="text-right">User Type</th>
+                                                    <th class="text-right">Employee's Role</th>
                                                 </tr>
                                                 </thead>
 
                                                 <tbody>
                                                 @foreach($users as $user)
-                                                    <tr
-                                                    @if($user->type != "approver")
-                                                    @else
-                                                        class="bg-success"
-                                                    @endif
-                                                    >
+                                                    <tr>
                                                         <td>{{ $user->id }}</td>
                                                         <td>{{ $user->employee_id }}</td>
                                                         <td>{{ $user->name }}</td>
                                                         <td>{{ $user->email }}</td>
                                                         <td>
-                                                            @if($user->type != "approver")
                                                             <label class="radio-inline pull-right">
-                                                                <input type="radio" name="user_role-{{ $user->id }}" id="inlineCheckbox1" value="user-{{ $user->id }}"> Agent
+                                                                <input type="radio" name="user_role-{{ $user->id }}" id="inlineCheckbox1" value="agent-{{ $user->id }}" > Agent
                                                             </label>
                                                             <label class="radio-inline pull-right">
                                                                 <input type="radio" name="user_role-{{ $user->id }}" id="inlineCheckbox2" value="approver-{{ $user->id }}"> Approver &nbsp;&nbsp;&nbsp;
                                                             </label>
-                                                            @else
-                                                                <label class="pull-right" style="font-style: italic;">user is already an approver</label>
-                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach

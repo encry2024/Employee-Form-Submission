@@ -31,7 +31,7 @@
                             @else
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered">
+                                        <table class="table table-striped">
                                             <thead>
                                                 <tr>
                                                     <th></th>

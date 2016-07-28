@@ -33,7 +33,7 @@ class FormController extends Controller
         return $postLeaveForm;
     }
 
-    public function showLeave(Leave $leave)
+    public function leaveForm(Leave $leave)
     {
         $approver_form = ApproverForm::whereFormUserId($leave->form_user_id)->get();
 

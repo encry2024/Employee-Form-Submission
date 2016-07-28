@@ -19,14 +19,13 @@
     <!-- JavaScripts -->
     <script src="{{ URL::to('/') }}/bootstrap-3.3.6-dist/js/jquery.min.js"></script>
     <script src="{{ URL::to('/') }}/bootstrap-datepicker/js/momentjs.js"></script>
-    <script src="{{ URL::to('/') }}/bootstrap-3.3.6-dist/js/jquery.min.js"></script>
     <script src="{{ URL::to('/') }}/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
     <script src="{{ URL::to('/') }}/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script src="{{ URL::to('/') }}/brianreavis-selectize/dist/js/standalone/selectize.min.js"></script>
 
 </head>
-<body id="app-layout">
 
+<body id="app-layout">
     @yield('content')
 
     <style>

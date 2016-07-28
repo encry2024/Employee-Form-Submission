@@ -95,6 +95,22 @@ class User extends Authenticatable
         return view('auth.approver.dashboard', compact('approvers'));
     }
 
+    public static function updateApprover($requestUpdateApprover)
+    {
+        if($requestUpdateApprover->get('password') != '') {
+            User::find(Auth::user()->id)->update([
+                'email' => $requestUpdateApprover->get('email'),
+                'password' => bcrypt($requestUpdateApprover->get('password'))
+            ]);
+
+            Auth::logout();
+        } else {
+            User::find(Auth::user()->id)->update(['email' => $requestUpdateApprover->get('email')]);
+
+            return redirect()->back()->with('message', 'Information was successfully updated');
+        }
+    }
+
 
 
 

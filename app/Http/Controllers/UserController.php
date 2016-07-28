@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RequestUpdateApprover;
 use Illuminate\Http\Request;
 
 use App\User;
@@ -24,7 +25,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::whereType('user')->get();
+        $users = User::all();
         $campaigns = Campaign::all();
 
         return view('users.index', compact('users', 'campaigns'));
@@ -32,7 +33,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $users = User::whereType('user')->get();
+        $users = User::all();
         $campaigns = Campaign::all();
 
         return view('users.create', compact('users', 'campaigns'));
@@ -69,6 +70,18 @@ class UserController extends Controller
         $get_users = User::getUsers($department_id, $user);
 
         return $get_users;
+    }
+
+    public function approverProfile()
+    {
+        return view('auth.approver.profile');
+    }
+
+    public function updateApprover(RequestUpdateApprover $requestUpdateApprover)
+    {
+        $update_approver = User::updateApprover($requestUpdateApprover);
+
+        return $update_approver;
     }
 
 }

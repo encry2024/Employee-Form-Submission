@@ -7,6 +7,11 @@
     font-style: italic;
 }
 
+.sub-title {
+    font-size: 15px;
+    font-style: italic;
+}
+
 .nav-item.active {
     background-color: #0091B7;
     color: white;

@@ -29,7 +29,7 @@ Route::group(['middleware' => ['check_if_admin']], function() {
                 Route::get('/departments/create', 'CampaignController@create')->name('create_campaign');
                 Route::post('/departments/create', 'CampaignController@postCampaign')->name('post_campaign');
                 Route::get('/department/{department}', 'CampaignController@show')->name('show_campaign');
-                Route::get('/{department}/add_user/', 'CampaignController@addUser')->name('add_users');
+                Route::get('/{department}/add_employee', 'CampaignController@addEmployee')->name('add_employee');
                 Route::post('/{department}/add_user/', 'CampaignController@postAddUser')->name('post_add_user');
 
                 /* Approver */
@@ -37,12 +37,12 @@ Route::group(['middleware' => ['check_if_admin']], function() {
                 Route::patch('/update/approver/{approver}/update_rank', 'ApproverController@postUpdateRank')->name('update_approver_rank');
 
                 /* Forms */
-                Route::get('/leave/{leave}', 'FormController@showLeave')->name('show_leave');
+                Route::get('/leave/{leave}', 'FormController@leaveForm')->name('show_leave');
     });
 });
 
-/* USER GROUP */
-Route::group(['prefix' => 'user'], function() {
+/* AGENT GROUP */
+Route::group(['prefix' => 'agent'], function() {
             /* Dashboard */
             Route::get('/dashboard', 'HomeController@userIndex')->name('user_home');
 
@@ -52,7 +52,7 @@ Route::group(['prefix' => 'user'], function() {
             Route::post('/edit/profile', 'UserController@postEditUserProfile')->name('post_update_user');
 
             /* Forms */
-            Route::get('/leave_form', 'FormController@leaveForm')->name('leave_form');
+            Route::get('/leave_form', 'FormController@viewLeave')->name('leave_form');
             Route::post('/leave_form', 'FormController@postLeaveForm')->name('post_leave_form');
             Route::get('submitted/leave', 'FormController@viewLeave')->name('leave');
             Route::get('submitted/change_schedule', 'FormController@viewChangeSchedule')->name('change_schedule');
@@ -62,8 +62,11 @@ Route::group(['prefix' => 'user'], function() {
 /* APPROVER GROUP */
 Route::group(['prefix' => 'approver', 'middleware' => ['check_if_approver']], function() {
             Route::get('/dashboard', 'HomeController@approverIndex')->name('approver_home');
+            Route::get('/profile', 'UserController@approverProfile')->name('approver_profile');
+            Route::patch('/update', 'UserController@updateApprover')->name('update_approver_info');
 
-            /* Show pending forms */
+            /* Leave form */
             Route::get('/leave/{leave}', 'LeaveController@showApproverLeave')->name('approver_show_leave');
+            Route::patch('/approve/leave', 'LeaveController@approveLeaveForm')->name('approve_leave');
 });
 

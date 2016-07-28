@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ApproverForm extends Model
 {
     //
+    protected $fillable = ['status'];
     protected $table = 'approver_form';
 
     public function approver()

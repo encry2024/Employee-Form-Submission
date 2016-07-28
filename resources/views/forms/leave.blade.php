@@ -18,8 +18,15 @@
                 </div>
 
                 <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12 col-lg-offset-2 col-sm-offset-3 main">
+                    <br><br>
+                    @if(Session::has('message'))
+                        <div class="row">
+                            <div class="alert alert-success" role="alert">
+                                <span class="glyphicon glyphicon-ok"></span> {{ Session::get('message') }}
+                            </div>
+                        </div>
+                    @endif
                     <div class="row">
-                        <br><br><br>
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h2 class="panel-title">Leave Request Form</h2>
@@ -104,11 +111,9 @@
                                     </div>
                                 </div>
 
-                                @if($approverForm->status == 'on-approve')
-                                    <div class="panel-footer">
-                                        <button type="submit" class="btn btn-default">Submit Leave Form</button>
-                                    </div>
-                                @endif
+                                <div class="panel-footer">
+                                    <button type="submit" class="btn btn-default">Submit Leave Form</button>
+                                </div>
                             </form>
                         </div>
                     </div>
