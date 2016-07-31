@@ -20,59 +20,54 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <h3>Pending Forms</h3>
-                                </div>
-                            </div>
-                        </div>
-
                         <br>
 
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                        <div class="list-group">
-                                            <div class="list-group-item form-title" style="background-color: #f5f5f5; border-color: #ddd;">
-                                            Leave Forms
+                                <div>
+
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Pending Leave Form</a></li>
+                                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Pending Change Schedule Form</a></li>
+                                        <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Pending Overtime Form</a></li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane active" id="home">
+                                            <br>
+                                            <div class="col-lg-12">
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <th>Form ID</th>
+                                                            <th>Submitted By</th>
+                                                            <th>Leave Purpose</th>
+                                                            <th>Date Submitted</th>
+                                                            <th>Action</th>
+                                                        </thead>
+
+                                                        <tbody>
+                                                        @foreach($leaves as $leave)
+                                                            <tr>
+                                                                <td>{{ $leave->id }}</td>
+                                                                <td>{{ $leave->form_user->user->name }}</td>
+                                                                <td>{{ $leave->leave_purpose }}</td>
+                                                                <td>{{ date('F d, Y', strtotime($leave->created_at)) }}</td>
+                                                                <td>
+                                                                    <a href="{{ route('show_leave', $leave->id) }}"
+                                                                       class="btn btn-primary">View</a>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
-                                            @foreach($leaves as $leave)
-                                                <a href="{{ route('show_leave', $leave->id) }}" class="list-group-item">
-                                                    {{ $leave->leave_purpose }}
-                                                    <br>
-                                                    <span class="description">{{ $leave->form_user->user->name }}</span>
-                                                    <span class="float-right description">{{ date('F d, Y', strtotime($leave->created_at)) }}</span>
-                                                </a>
-                                            @endforeach
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                        <div class="list-group">
-                                            <div class="list-group-item form-title" style="background-color: #f5f5f5; border-color: #ddd;">
-                                            Change Schedules Forms
-                                            </div>
-                                            <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-                                            <a href="#" class="list-group-item">Morbi leo risus</a>
-                                            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                                            <a href="#" class="list-group-item">Vestibulum at eros</a>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                        <div class="list-group">
-                                            <div class="list-group-item form-title" style="background-color: #f5f5f5; border-color: #ddd;">
-                                            Overtime Forms
-                                            </div>
-                                            <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-                                            <a href="#" class="list-group-item">Morbi leo risus</a>
-                                            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                                            <a href="#" class="list-group-item">Vestibulum at eros</a>
-                                        </div>
-                                    </div>
-                                    
                                 </div>
                             </div>
                         </div>

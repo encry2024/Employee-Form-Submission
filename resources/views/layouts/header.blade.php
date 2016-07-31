@@ -1,4 +1,4 @@
-<nav class="navbar-fixed-top navbar-inverse" style="border-radius: 0px; border-bottom-style: solid;">
+<nav class="navbar-fixed-top navbar-inverse" style="border-radius: 0px; border-bottom-style: solid; background-color: #ffa500; border-color: #ffa500;">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -8,16 +8,29 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" style="font-size: 20px; color: white;">Employee Form Submission</a>
+            <a class="navbar-brand" href="#">
+                <span class="glyphicon glyphicon-envelope"></span>
+            </a>
+            <a class="navbar-brand" href="#" style="font-size: 20px; color: #3d3d3d;">
+
+                Employee Form Submission</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" style="color: white;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Logged in as :: {{ Auth::user()->name }}</a></li>
-                <li><a href="{{ url('/logout') }}">Change Password</a></li>
-                <li><a href="{{ url('/logout') }}">Logout</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-user"></span> {{ Auth::user()->name }} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ route('approver_profile') }}"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp; Profile</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;&nbsp; Settings</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp; Logs</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="{{ url('/logout') }}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><span class="glyphicon glyphicon-info-sign"></span> Report an Issue</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

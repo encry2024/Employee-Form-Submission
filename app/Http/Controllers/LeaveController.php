@@ -27,4 +27,11 @@ class LeaveController extends Controller
 
         return $approve_leave;
     }
+
+    public function adminApproveForm(RequestApproveSubmittedForm $request_approve_submitted_form)
+    {
+        $approve_leave = Leave::adminApproveLeaveForm($request_approve_submitted_form);
+
+        return $approve_leave;
+    }
 }

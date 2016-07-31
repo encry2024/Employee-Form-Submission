@@ -35,7 +35,7 @@ class FormController extends Controller
 
     public function leaveForm(Leave $leave)
     {
-        $approver_form = ApproverForm::whereFormUserId($leave->form_user_id)->get();
+        $approver_form = ApproverForm::with(['approver.user'])->whereFormUserId($leave->form_user_id)->get();
 
         return view('forms.show', compact('approver_form', 'leave'));
     }

@@ -13,7 +13,7 @@
 }
 
 .nav-item.active {
-    background-color: #0091B7;
+    background-color: #565656;
     color: white;
     border-radius: 3px;
 }
@@ -29,7 +29,7 @@
         padding: 20px;
         overflow-x: hidden;
         overflow-y: auto;
-        background-color: #0091b7;
+        background-color: #565656;
     }
 }
 
