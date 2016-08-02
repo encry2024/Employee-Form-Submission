@@ -22,16 +22,6 @@
                     <div class="row">
                         <br><br>
                         <div class="row">
-                            <div class="col-lg-12">
-                                <ol class="breadcrumb">
-                                    <li>Dashboard</li>
-                                    <li>Form</li>
-                                    <li class="active">{{ $leave->form_user->user->name }}'s Leave</li>
-                                </ol>
-                            </div>
-                        </div>
-
-                        <div class="row">
                             <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                                 <table class="table table-bordered">
                                     <thead>

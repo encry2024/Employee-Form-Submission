@@ -28,22 +28,24 @@
 
                                     <!-- Nav tabs -->
                                     <ul class="nav nav-tabs" role="tablist">
-                                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Pending Leave Form</a></li>
-                                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Pending Change Schedule Form</a></li>
-                                        <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Pending Overtime Form</a></li>
+                                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Leave Form
+                                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="tab-badge">{{ count($leaves) }}</span></a></li>
+                                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Change Schedule Form</a></li>
+                                        <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Overtime Form</a></li>
                                     </ul>
 
                                     <!-- Tab panes -->
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane active" id="home">
-                                            <br>
+                                            <br><br>
                                             <div class="col-lg-12">
                                                 <div class="table-responsive">
-                                                    <table class="table table-striped">
-                                                        <thead>
+                                                    <table class="table">
+                                                        <thead style="background-color: #f4f4f4;">
                                                             <th>Form ID</th>
                                                             <th>Submitted By</th>
                                                             <th>Leave Purpose</th>
+                                                            <th>Status</th>
                                                             <th>Date Submitted</th>
                                                             <th>Action</th>
                                                         </thead>
@@ -54,10 +56,10 @@
                                                                 <td>{{ $leave->id }}</td>
                                                                 <td>{{ $leave->form_user->user->name }}</td>
                                                                 <td>{{ $leave->leave_purpose }}</td>
+                                                                <td><span class="label {{ $leave->status == 'PENDING' ? 'label-danger' : 'label-success' }} " style="font-size: 12px;">{{ $leave->status }}</span></td>
                                                                 <td>{{ date('F d, Y', strtotime($leave->created_at)) }}</td>
                                                                 <td>
-                                                                    <a href="{{ route('show_leave', $leave->id) }}"
-                                                                       class="btn btn-primary">View</a>
+                                                                    <a href="{{ route('show_leave', $leave->id) }}" class="btn btn-primary btn-sm">View</a>
                                                                 </td>
                                                             </tr>
                                                         @endforeach
