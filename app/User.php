@@ -86,15 +86,11 @@ class User extends Authenticatable
 
     public static function showApproverDashboard()
     {
-        $approver_form_withCount = Approver::withCount(['approver_forms' => function($query) {
-            $query->where('status', '=', 'PENDING');
-        }]);
+        $auth_approver_id = Auth::user()->approver->id;
 
-        $approverForms = $approver_form_withCount->with(['approver_forms.form_user.leave', 'approver_forms.form_user.user'])->whereUserId(Auth::user()->id)->get();
+        $approvers = ApproverForm::with(['form_user.leave', 'form_user.user'])->where('active', 1)->where('approver_id', $auth_approver_id)->get();
 
-        //dd($approverForms[0]->approver_forms_count);
-
-        return view('auth.approver.dashboard', compact('approverForms', 'countApproverApprovedForms'));
+        return view('auth.approver.dashboard', compact('approvers'));
     }
 
     public static function updateApprover($requestUpdateApprover)

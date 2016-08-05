@@ -37,18 +37,18 @@
                                 <th>Status</th>
                             </thead>
                             <tbody>
-                            @foreach($getApprovers as $approvers)
+                            @foreach($approver_list as $approvers)
                                 @if($approvers->status == 'PENDING')
                                     <tr>
                                         <td>{{ $approvers->approver->user->name }}</td>
                                         <td class="label-warning" style="color: white;">
-                                            <span class="glyphicon glyphicon-flag"></span>&nbsp;&nbsp;&nbsp;{{ $approvers->status }}</td>
+                                            <span class="glyphicon glyphicon-flag"></span>&nbsp;&nbsp;{{ $approvers->status }}</td>
                                     </tr>
                                 @elseif($approvers->status == 'APPROVED')
                                     <tr>
                                         <td >{{ $approvers->approver->user->name }}</td>
                                         <td class="label-success" style="color: white;">
-                                            <span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;&nbsp;{{ $approvers->status }}</td>
+                                            <span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;{{ $approvers->status }}</td>
                                     </tr>
                                 @endif
                             @endforeach
