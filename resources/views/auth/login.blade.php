@@ -1,77 +1,70 @@
 @extends('layouts.app')
 
-@section('header')
-    <nav class="navbar-fixed-top navbar-inverse" style="border-radius: 0px;">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#" style="color: white;">Employee Form Submission</a>
-            </div>
-        </div><!-- /.container-fluid -->
-    </nav>
-@stop
-
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 main">
-                <br><br><br><br><br><br>
-
-                <div class="alert alert-info" role="alert">
-                    Welcome to NSI :: Employee Form Submission Login Page
-                </div>
-
-                <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                    {!! csrf_field() !!}
-
-                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                        <label class="col-md-4 control-label">E-Mail Address</label>
-
-                        <div class="col-md-6">
-                            <input type="string" class="form-control" name="employee_id" value="{{ old('employee_id') }}">
-
-                            @if ($errors->has('employee_id'))
-                                <span class="help-block">
-                                <strong class="text-danger">{{ $errors->first('employee_id') }}</strong>
-                            </span>
-                            @endif
-                        </div>
+    <div class="container-fluid" style="background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dd4f14), to(#9b1f03)) no-repeat;">
+        <div class="row" style="margin-bottom: -11rem;">
+            <div class="col-md-7 center">
+                <br><br><br><br>
+                <p class="size-40 text-center" style="color: white; font-size: 35px;">NORTHSTAR SOLUTIONS INC</p>
+                <br/>
+                <div class="panel panel-default" style="-webkit-box-shadow: 0px 0px 9px 1px rgba(0,0,0,0.75);
+                                                    -moz-box-shadow: 0px 0px 9px 1px rgba(0,0,0,0.75);
+                                                    box-shadow: 0px 0px 9px 1px rgba(0,0,0,0.75); margin-top: 5rem;
+                                                    margin-bottom: -2rem;">
+                    <div class="panel-heading white-bg">
+                        <span><img src="{!! URL::to('/') !!}/logo-nsi.png" style="margin-bottom: -3.5rem; margin-right: 1rem;"></span>
+                        <span><label class="sgnin-lbl size-16">Sign in to</label></span>
+                        <br>
+                        <span><label class="size-24 nsi-lbl">Employee Form Submission</label></span>
                     </div>
-
-                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                        <label class="col-md-4 control-label">Password</label>
-
-                        <div class="col-md-6">
-                            <input type="password" class="form-control" name="password">
-
-                            @if ($errors->has('password'))
-                                <span class="help-block">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-6 col-md-offset-4">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="remember"> Remember Me
-                                </label>
+                    <div class="panel-body">
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
                             </div>
-                        </div>
-                    </div>
+                        @endif
 
-                    <div class="form-group">
-                        <div class="col-md-6 col-md-offset-4">
-                            <button type="submit" class="btn btn-success">
-                                <span class="glyphicon glyphicon-ok"></span> Login
-                            </button>
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                            {{ csrf_field() }}
+                            <br>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">E-Mail Address</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" name="employee_id" value="{{ old('employee_id') }}">
+                                </div>
+                            </div>
 
-                            <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
-                        </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Password</label>
+                                <div class="col-md-6">
+                                    <input type="password" class="form-control" name="password">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="remember"> Remember Me
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <button type="submit" class="btn btn-primary">Login</button>
+                                    <a class="btn btn-link" href="{{ url('/password/email') }}">Forgot Your Password?</a>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

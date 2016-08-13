@@ -11,8 +11,8 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ URL::to('/') }}/bootstrap-3.3.6-dist/css/bootstrap.css">
-    <link rel="stylesheet" href="{{ URL::to('/') }}/bootstrap-datepicker/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="{{ URL::to('/') }}/custom_css/nsi.css">
+    <link rel="stylesheet" href="{{ URL::to('/') }}/bootstrap-datepicker/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="{{ URL::to('/') }}/brianreavis-selectize/dist/css/selectize.bootstrap3.css">
     <link rel="stylesheet" href="{{ URL::to('/') }}/font-awesome-4.5.0/css/font-awesome.min.css">
 
@@ -31,6 +31,7 @@
     <style>
         body {
             font-family: 'Lato';
+            background-color: #eee;
         }
     </style>
 

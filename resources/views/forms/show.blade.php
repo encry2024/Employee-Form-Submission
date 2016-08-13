@@ -21,6 +21,24 @@
                 <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12 col-lg-offset-2 col-sm-offset-3 main">
                     <div class="row">
                         <br><br>
+                        @if(Session::has('message'))
+                            <div class="row">
+                                <div class="alert alert-success alert-dismissable" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span></button>
+                                    {{ Session::get('message') }}
+                                </div>
+                            </div>
+                        @endif
+
+                        @if($leave->status == 'APPROVED')
+                            <div class="row">
+                                <div class="alert alert-success alert-dismissable" role="alert">
+                                    This leave form has already been {{ $leave->status }}
+                                </div>
+                            </div>
+                        @endif
+
                         <div class="row">
                             <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                                 <table class="table table-bordered">

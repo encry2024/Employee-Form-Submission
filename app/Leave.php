@@ -55,9 +55,8 @@ class Leave extends Model
         return redirect()->back()->with('message', 'You have successfully approved the submitted Leave Form');
     }
 
-    public static function adminApproveLeaveForm($request_approve_submitted_form)
+    public static function adminApproveLeaveForm($leave)
     {
-        $leave = Leave::whereFormUserId($request_approve_submitted_form->get('form_user_id'));
         $leave->update([
             'status' => 'APPROVED'
         ]);

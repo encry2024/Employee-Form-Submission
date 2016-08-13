@@ -25,7 +25,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::all();
+        $users = User::where('type', '!=', 'admin')->get();
         $campaigns = Campaign::all();
 
         return view('users.index', compact('users', 'campaigns'));
@@ -82,6 +82,21 @@ class UserController extends Controller
         $update_approver = User::updateApprover($requestUpdateApprover);
 
         return $update_approver;
+    }
+
+    public function showApproverProfile(User $user)
+    {
+        return view('users.approver_profile', compact('user'));
+    }
+
+    public function showAgentProfile(User $user)
+    {
+        return view('users.agent_profile', compact('user'));
+    }
+
+    public function editUser(User $user)
+    {
+        return 'Edit User';
     }
 
 }

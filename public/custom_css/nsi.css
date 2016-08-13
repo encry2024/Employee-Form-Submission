@@ -13,16 +13,25 @@
 
 @media (min-width: 768px) {
     .sidebar {
+        width: 210px;
+        height: 100%;
         position: fixed;
-        top: 50px;
-        bottom: 0;
-        left: 0;
-        z-index: 1000;
-        display: block;
-        padding: 20px;
-        overflow-x: hidden;
-        overflow-y: auto;
-        background-color: #565656 !important;
+        font-weight: 600;
+        background: #A9370C;
+    }
+}
+
+@media (max-width: 767px) {
+    .sidebar {
+        margin-top: -1.55rem;
+        margin-bottom: 0.55rem;
+        font-weight: 600;
+        background: #A9370C;
+        padding-bottom: 5px;
+    }
+
+    .main {
+        margin-top: -2rem;
     }
 }
 
@@ -109,7 +118,7 @@
     display: inline-block;
     min-width: 10px;
     padding: 3px 7px;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     line-height: 1;
     color: white;
@@ -118,4 +127,42 @@
     vertical-align: middle;
     background-color: #d9534f;
     border-radius: 3px;
+}
+
+a.header_link:hover {
+    color: white !important;
+}
+
+.navbar-default-toggle .navbar .icon-bar {
+    background-color: #0000ff;
+}
+
+.navbar .navbar-toggle .icon-bar {
+    background-color: #ff0000;
+}
+
+.nsi-lbl {
+    margin-left: 5.75rem;
+}
+
+.sgnin-lbl {
+    margin-bottom: -3rem;
+}
+
+.white-bg {
+    background-color: white !important;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    float: none !important;
+}
+
+.point-border {
+    border-radius: 0px;
+}
+
+.success-bg {
+    background-color: #d6e9c6;
 }

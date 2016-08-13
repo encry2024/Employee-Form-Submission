@@ -23,6 +23,9 @@ Route::group(['middleware' => ['check_if_admin']], function() {
         Route::get('/user/create', 'UserController@create')->name('create_user');
         Route::post('/user/create' ,'UserController@postUser')->name('post_user');
         Route::get('/user/{user}', 'UserController@showUser')->name('show_user');
+        Route::get('/user/edit/{user}', 'UserController@editUser')->name('edit_user');
+        Route::get('user/approver/{user}', 'UserController@showApproverProfile')->name('show_approver_profile');
+        Route::get('user/agent/{user}', 'UserController@showAgentProfile')->name('show_agent_profile');
 
         /* Departments */
         Route::get('/departments', 'CampaignController@index')->name('campaigns');
@@ -40,7 +43,7 @@ Route::group(['middleware' => ['check_if_admin']], function() {
         Route::get('/leave/{leave}', 'FormController@leaveForm')->name('show_leave');
 
         /* Approve */
-        Route::post('/approve/form/{form_user}', 'LeaveController@adminApproveForm')->name('updateApproverStatus');
+        Route::patch('/approve/form/{leave}', 'LeaveController@adminApproveForm')->name('updateApproverStatus');
     });
 });
 
