@@ -9,6 +9,7 @@ use App\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\StoreUserSettingsRequest;
 use App\Campaign;
+use App\FormUser;
 
 
 class UserController extends Controller
@@ -86,7 +87,9 @@ class UserController extends Controller
 
     public function showApproverProfile(User $user)
     {
-        return view('users.approver_profile', compact('user'));
+        $getSubmittedLeaveCount = FormUser::with(['leave'])->whereUserId($user->id)->get();
+
+        return view('users.approver_profile', compact('user', 'getSubmittedLeaveCount'));
     }
 
     public function showAgentProfile(User $user)

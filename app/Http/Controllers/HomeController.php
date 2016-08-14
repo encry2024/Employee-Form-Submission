@@ -32,7 +32,7 @@ class HomeController extends Controller
     public function index()
     {
         $leaves = Leave::with(['form_user.user'])->whereStatus('PENDING')->get();
-        $users = User::all();
+        $users = User::where('type', '!=', 'admin')->get();
         $campaigns = Campaign::all();
 
         // dd($pending_forms);
