@@ -10,6 +10,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\StoreUserSettingsRequest;
 use App\Campaign;
 use App\FormUser;
+use App\Http\Requests\RequestUpdateApproverInformationByAdmin;
 
 
 class UserController extends Controller
@@ -85,6 +86,7 @@ class UserController extends Controller
         return $update_approver;
     }
 
+    # Approver Functions
     public function showApproverProfile(User $user)
     {
         $getSubmittedLeaveCount = FormUser::with(['leave'])->whereUserId($user->id)->get();
@@ -92,6 +94,29 @@ class UserController extends Controller
         return view('users.approver_profile', compact('user', 'getSubmittedLeaveCount'));
     }
 
+    public function showApproverSubmittedLeaves(User $user)
+    {
+        $leaves = FormUser::with(['leave'])->whereUserId($user->id)->get();
+
+        return view('users.approver-tabs.leave', compact('user', 'leaves'));
+    }
+
+    public function editApprover(User $user)
+    {
+        return view('users.approver-edit', compact('user'));
+    }
+
+    public function postEditApprover(RequestUpdateApproverInformationByAdmin $requestUpdateApproverInformationByAdmin, User $user)
+    {
+        $user->update([
+            'name' => $requestUpdateApproverInformationByAdmin->get('name'),
+            'email' => $requestUpdateApproverInformationByAdmin->get('email')
+        ]);
+
+        return redirect()->back()->with('message', $user->name . '\'s information was successfully updated');
+    }
+
+    # Agent Functions
     public function showAgentProfile(User $user)
     {
         return view('users.agent_profile', compact('user'));

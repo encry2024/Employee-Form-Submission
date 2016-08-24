@@ -37,7 +37,7 @@ class Leave extends Model
         $approver_form = ApproverForm::where('approver_id', $approver_id)->where('form_user_id', $request_approve_submitted_form->get('form_user_id'))->first();
 
         // Get the next ApproverForm approver
-        $approverCampaign = ApproverCampaign::with(['approver.user'])->whereCampaignId($approver_form->form_user->user->campaign_id)->where('approver_id', '>', $approver_id)->orderBy('id','asc')->first();
+        $approverCampaign = ApproverCampaign::with(['approver.user'])->whereCampaignId($approver_form->form_user->user->campaign_id)->where('approver_id', '>=', $approver_id)->orderBy('id','asc')->first();
 
         $approver_form->update([
             'status' => 'APPROVED',
@@ -62,5 +62,48 @@ class Leave extends Model
         ]);
 
         return redirect()->back()->with('message', 'You have successfully approved the submitted Leave Form');
+    }
+
+    public static function postLeave($requestSubmitLeaveByApprover)
+    {
+        $campaign_id = Auth::user()->campaign_id;
+        $approver_campaigns = ApproverCampaign::whereCampaignId($campaign_id)->orderBy('rank', 'ASC')->get();
+
+        // dd($approver_campaigns);
+
+        $form_user = new FormUser();
+        $form_user->form_id = $request->get('form_id');
+        $form_user->user_id = $request->get('user_id');
+
+        if($form_user->save()) {
+            $leave_form = new Leave();
+            $leave_form->form_user_id = $form_user->id;
+            $leave_form->start_date = date('Y-m-d', strtotime($request->get('start')));
+            $leave_form->end_date = date('Y-m-d', strtotime($request->get('end')));
+            $leave_form->reason = $request->get('leave_reason');
+            $leave_form->leave_purpose = $request->get('leave_option');
+            $leave_form->status = 'PENDING';
+
+            if($leave_form->save()) {
+                foreach($approver_campaigns as $key=>$approver_campaign) {
+                    if($key == 0) {
+                        $approver_form = new ApproverForm();
+                        $approver_form->approver_id = $approver_campaign->approver_id;
+                        $approver_form->form_user_id = $form_user->id;
+                        $approver_form->status = 'PENDING';
+                        $approver_form->active = 1;
+                        $approver_form->save();
+                    } else {
+                        $approver_form = new ApproverForm();
+                        $approver_form->approver_id = $approver_campaign->approver_id;
+                        $approver_form->form_user_id = $form_user->id;
+                        $approver_form->status = 'PENDING';
+                        $approver_form->save();
+                    }
+                }
+            }
+        }
+
+        return redirect()->back()->with('message', 'Leave form was successfully submitted');
     }
 }

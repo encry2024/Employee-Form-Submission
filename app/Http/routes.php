@@ -24,7 +24,8 @@ Route::group(['middleware' => ['check_if_admin']], function() {
         Route::post('/user/create' ,'UserController@postUser')->name('post_user');
         Route::get('/user/{user}', 'UserController@showUser')->name('show_user');
         Route::get('/user/edit/{user}', 'UserController@editUser')->name('edit_user');
-        Route::get('user/approver/{user}', 'UserController@showApproverProfile')->name('show_approver_profile');
+
+        # Agent Profile
         Route::get('user/agent/{user}', 'UserController@showAgentProfile')->name('show_agent_profile');
 
         /* Departments */
@@ -38,6 +39,11 @@ Route::group(['middleware' => ['check_if_admin']], function() {
         /* Approver */
         Route::post('/appoint_approver', 'CampaignController@postApprover')->name('post_approver');
         Route::patch('/update/approver/{approver}/update_rank', 'ApproverController@postUpdateRank')->name('update_approver_rank');
+        # Approver Profile
+        Route::get('user/approver/{user}', 'UserController@showApproverProfile')->name('show_approver_profile');
+        Route::get('/user/approver/{user}/submitted-leaves', 'UserController@showApproverSubmittedLeaves')->name('show_approver_submitted_leaves');
+        Route::get('/user/approver/{user}/edit', 'UserController@editApprover')->name('edit_approver');
+        Route::patch('/user/approver/{user}/edit', 'UserController@postEditApprover')->name('post_edit_approver');
 
         /* Forms */
         Route::get('/leave/{leave}', 'FormController@leaveForm')->name('show_leave');
@@ -74,5 +80,7 @@ Route::group(['prefix' => 'approver', 'middleware' => ['check_if_approver']], fu
     /* Leave form */
     Route::get('/leave/{leave}', 'LeaveController@showApproverLeave')->name('approver_show_leave');
     Route::patch('/approve/leave', 'LeaveController@approveLeaveForm')->name('approve_leave');
+    Route::get('/form/leave/create', 'LeaveController@createLeave')->name('create_leave');
+    Route::post('/form/leave/create', 'LeaveController@postLeave')->name('post_leave');
 });
 

@@ -8,10 +8,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            <button type="button" style="float: left;" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-toggle" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
             <a class="navbar-brand" href="#">
                 <img alt="Brand" src="{{ URL::to('/') }}/logo-nsi.png" style="margin-top: -1.35rem;">
             </a>
-            <a class="navbar-brand" href="#" style="font-size: 20px; color: #3d3d3d; margin-left: -2rem;">Employee Form Submission</a>
+            <a class="navbar-brand" href="#" style="font-size: 20px; color: #3d3d3d; margin-left: -2rem;">EFS</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

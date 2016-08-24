@@ -10,6 +10,7 @@ use App\ApproverForm;
 use App\ApproverCampaign;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\RequestApproveSubmittedForm;
+use App\Http\Requests\RequestSubmitLeaveByApprover;
 
 class LeaveController extends Controller
 {
@@ -33,5 +34,17 @@ class LeaveController extends Controller
         $approve_leave = Leave::adminApproveLeaveForm($leave);
 
         return $approve_leave;
+    }
+
+    public function createLeave()
+    {
+        return view('auth.approver.leave');
+    }
+
+    public function postLeave(RequestSubmitLeaveByApprover $requestSubmitLeaveByApprover)
+    {
+        $post_leave = Leave::postLeave($requestSubmitLeaveByApprover);
+
+        return $post_leave;
     }
 }
